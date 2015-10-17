@@ -12,7 +12,7 @@ GameObject:
   - 212: {fileID: 21292756}
   - 58: {fileID: 5844204}
   m_Layer: 0
-  m_Name: Shield Pickup
+  m_Name: MassiveAcceleration
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickupType: 1
+  MassiveAccelerationValue: .600000024
+  MassiveDecelerationValue: .200000003
   ExpirationTime: 0
   StartBlinkTime: 0
 --- !u!212 &21292756
@@ -81,7 +83,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 833249835
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: de061f7c024e845b182054435ae7d84d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b3e34eb36af6024396f10e88d8efb78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -89,7 +91,16 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: PickupType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b3e34eb36af6024396f10e88d8efb78,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 186600}

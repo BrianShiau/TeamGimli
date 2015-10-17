@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pickups:
-  - {fileID: 186600, guid: 2214c99918857413bbfd5752c1258a38, type: 2}
-  - {fileID: 186600, guid: c39633fd9562249baaba593f711d676e, type: 2}
+  - {fileID: 186600, guid: e7ab03fcbb260094f8a0ae9dfe5b0e94, type: 2}
+  - {fileID: 186600, guid: 7f174bd0dffc6064cbc8286c3afa58b1, type: 2}
   TimeBetween: 15
   MaxSimultaneous: 2
   TimeToLive: 10
@@ -192,7 +192,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Pickups.Array.data[0]
+      value: 
+      objectReference: {fileID: 186600, guid: e7ab03fcbb260094f8a0ae9dfe5b0e94, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Pickups.Array.data[1]
+      value: 
+      objectReference: {fileID: 186600, guid: 7f174bd0dffc6064cbc8286c3afa58b1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132786}
