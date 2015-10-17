@@ -6,8 +6,13 @@ public class Pickup : MonoBehaviour
 {
 	public enum Type
 	{
-		GrowInstantly,
-		Shield
+		Shield,
+		MassiveAccel,
+		MassiveDecel,
+		StickyPad,
+		GrapplingHook,
+		StopGun,
+		AlterThreshold
 	}
 
 	public Type PickupType;
@@ -33,18 +38,44 @@ public class Pickup : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		var hero = other.gameObject.GetComponent<Hero>();
-		if (null == hero)
-		{
+		if (hero == null)
 			return;
-		}
-		if (this.PickupType == Type.Shield)
+
+		Debug.Log(this.PickupType.ToString());
+
+		switch(this.PickupType)
 		{
-			ShieldBuff.AddToHero (hero);
+			case Type.Shield:
+			{
+				ShieldBuff.AddToHero (hero);
+				break;
+			}
+			case Type.MassiveAccel:
+			{
+				break;
+			}
+			case Type.MassiveDecel:
+			{
+				break;
+			} 
+			case Type.StickyPad:
+			{
+				break;
+			} 
+			case Type.GrapplingHook:
+			{
+				break;
+			} 
+			case Type.StopGun:
+			{
+				break;
+			} 
+			case Type.AlterThreshold:
+			{
+				break;
+			} 
 		}
-		// else
-		// {
-		// 	hero.Grow(true);
-		// }
+
 		GameObject.Destroy (this.gameObject);
 	}
 }
