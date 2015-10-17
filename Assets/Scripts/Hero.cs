@@ -205,17 +205,19 @@ public class Hero : MonoBehaviour
 		}
 
 		// check powerups
-		if(hasPowerup)
+		if (this.hasPowerup)
 		{
 			if (this.TimeTillNotAccelerated != 0)
 			{
 				if (Time.time > this.TimeTillNotAccelerated)
 				{
-				this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
-				this.TimeTillNotAccelerated = 0;
-				hasPowerup = false;
+					this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
+					this.TimeTillNotAccelerated = 0;
+					this.hasPowerup = false;
 				}
 			}
+			if(!this.hasPowerup)
+				Debug.Log(this.name + "'s powerup ended");
 		}
 
 		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
@@ -271,8 +273,8 @@ public class Hero : MonoBehaviour
 		this.velocity = new Vector2 (this.velocity.x * scalar, this.velocity.y * scalar);
 	}
 
-	public float defaultScalarAccelerationModifier = 0.4f; // SHOULD BE SET IN START
-	public float scalarAccelerationModifier;
+	public float defaultScalarAccelerationModifier = 0.4f;
+	public float scalarAccelerationModifier; // will be set in start, changing in gui will do nothing
 	public float StaticMargin = 0.4f;
 	public float FallingMargin = 0.5f;
 	public float MaxNewSpeed = 50.0f;

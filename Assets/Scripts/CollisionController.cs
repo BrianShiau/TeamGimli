@@ -2,51 +2,58 @@
 using System.Collections;
 
 public class CollisionController : MonoBehaviour {
-  public float radius=0.5f;
-  public float x,y;
-  public float distanceFactor=1f;
-  public float maxX,maxY,minX,minY;
+  private float radius=0.5f;
+  private float x,y;
+  private float distanceFactor=1f;
+  private float maxX, minX, maxY, minY;
   
   private Hero thisHero;
   private Hero otherHero;
   
 	// Use this for initialization
 	void Start () {
-    minY=-14.0f; 
-    maxY=4.4f;
-    
+	  maxX = 28.0f;
+	  minX = -28.0f;
+	  maxY = 12.5f;
+	  minY = -12.5f;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-    GameObject[] objs = GameObject.FindObjectsOfType(typeof(CollisionController)) as GameObject[];
-    thisHero = gameObject.GetComponent<Hero>();
-    
-    foreach (GameObject obj in objs){
-      if(obj != gameObject)//if not this object
-      {
-        Vector2 thisVelocity = thisHero.velocity; //this collision controller
-        float thisX = gameObject.transform.position.x;
-        float thisY = gameObject.transform.position.y;
-        
-        otherHero = obj.GetComponent<Hero>(); //the other collision controller
-        Vector2 otherVelocity = otherHero.velocity;
-        float otherX = obj.transform.position.x;
-        float otherY = obj.transform.position.y;
-        
-        Vector3 linePoint1 = new Vector3(thisX,thisY,0); //input for line line intersection
-        Vector3 lineVec1 = thisVelocity;
-        Vector3 linePoint2 = new Vector3(otherX,otherY,0);
-        Vector3 lineVec2 = otherVelocity;
-        Vector3 intersection;
-        if(LineLineIntersection(out intersection,linePoint1,lineVec1,linePoint2,lineVec2)){ //collision detected
-          //reverse directions
-          thisHero.velocity = new Vector2(-thisVelocity.x,-thisVelocity.y);
-        }
-        //if within walls
-        //detect collision
-      }
-    }
+		// See if out of bounds
+	    this.thisHero = gameObject.GetComponent<Hero>();
+
+		DetectEdge();
+
+	    var objs = GameObject.FindObjectsOfType<CollisionController>() as CollisionController[];
+	    
+	    foreach (CollisionController cont in objs){
+	      GameObject obj = cont.gameObject;
+	      if(obj != this.gameObject)//if not this object
+	      {
+	        Vector2 thisVelocity = thisHero.velocity; //this collision controller
+	        float thisX = gameObject.transform.position.x;
+	        float thisY = gameObject.transform.position.y;
+	        
+	        otherHero = obj.GetComponent<Hero>(); //the other collision controller
+	        Vector2 otherVelocity = otherHero.velocity;
+	        float otherX = obj.transform.position.x;
+	        float otherY = obj.transform.position.y;
+	        
+	        Vector3 linePoint1 = new Vector3(thisX, thisY, 0); //input for line line intersection
+	        Vector3 lineVec1 = new Vector3(thisVelocity.x * distanceFactor, thisVelocity.y * distanceFactor, 0);
+	        Vector3 linePoint2 = new Vector3(otherX, otherY, 0);
+	        Vector3 lineVec2 = new Vector3(otherVelocity.x * distanceFactor, otherVelocity.y * distanceFactor, 0);
+	        Vector3 intersection;
+	        if(LineLineIntersection(out intersection,linePoint1,lineVec1,linePoint2,lineVec2)){ //collision detected
+	          //reverse directions
+	          Debug.Log("Collision");
+	          thisHero.velocity = new Vector2(-thisVelocity.x,-thisVelocity.y);
+	        }
+	        //if within walls
+	        //detect collision
+	      }
+	    }
     
 	}
   
@@ -80,6 +87,28 @@ public class CollisionController : MonoBehaviour {
  
 		else{
 			return false;       
+		}
+	}
+
+	void DetectEdge() {
+		float thisX = gameObject.transform.position.x;
+	    float thisY = gameObject.transform.position.y;
+	    Vector2 thisVelocity = thisHero.velocity;
+
+		if(thisX >= this.maxX || thisX <= this.minX)
+		{
+			thisX += (thisX >= this.maxX ? -1 : 1);
+			Vector3 pos = new Vector3(thisX, thisY, 0);
+			gameObject.transform.position = pos;
+			this.thisHero.velocity = new Vector2(-thisVelocity.x, thisVelocity.y);
+		}
+
+		if(thisY >= this.maxY || thisY <= this.minY)
+		{
+			thisY += (thisY >= this.maxY ? -1 : 1);
+			Vector3 pos = new Vector3(thisX, thisY, 0);
+			gameObject.transform.position = pos;
+			this.thisHero.velocity = new Vector2(thisVelocity.x, -thisVelocity.y);
 		}
 	}
 
