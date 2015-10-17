@@ -44,8 +44,17 @@ public class Pickup : MonoBehaviour
 		var hero = other.gameObject.GetComponent<Hero>();
 		if (hero == null)
 			return;
+		else if (hero.hasPowerup)
+		{
+			Debug.Log(hero.name + " could not pick up: " + this.PickupType.ToString());
+			return;
+		}
 		else
+		{
+			Debug.Log(hero.name + " picked up: " + this.PickupType.ToString());
 			hero.hasPowerup = true;
+		}
+
 		switch(this.PickupType)
 		{
 			case Type.Shield:
