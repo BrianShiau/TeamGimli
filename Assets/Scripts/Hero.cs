@@ -344,24 +344,56 @@ public class Hero : MonoBehaviour
 
 	public void Hit (Hero attackingHero)
 	{
+        attackingHero.GetComponent<ShieldBuff>().enabled = false;
+        Debug.Log("Hero shooting: " + attackingHero.PlayerIndex);
+        Debug.Log("Who got shot: " + this.PlayerIndex);
+        attackingHero.Die(this);
+        Die(this);
+        return;
 		if (this == attackingHero || !this.IsAlive())
 		{
 			return;
 		}
 
-		GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
-		projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
-		projectileExplosion.transform.localScale *= attackingHero.scale / attackingHero.StartScale;
+        // This hero is fast enough to kill the hero that ran into it
+        if (this.AboveThreshold && !attackingHero.AboveThreshold)
+        {
+            GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
+            projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
+            attackingHero.Die(null);
+        }
 
-		if (this.GetComponent<ShieldBuff>().enabled)
-		{
-			this.GetComponent<ShieldBuff>().enabled = false;
-		}
-		else
-		{
-			this.Die(attackingHero);
-		}
+        // Hero that rammed this hero is fast enough to kill
+        else if (!this.AboveThreshold && attackingHero.AboveThreshold)
+        {
+            this.Die(null);
+        }
+
+        // Neither of the colliding heroes are fast enough to kill, so they reverse their direction
+        else
+        {
+            this.accelerateByScalar(-1.0f);
+            attackingHero.accelerateByScalar(-1.0f);
+        }
+		/* GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity); */
+		/* projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite; */
+		/* projectileExplosion.transform.localScale *= attackingHero.scale / attackingHero.StartScale; */
+
+		/* if (this.GetComponent<ShieldBuff>().enabled) */
+		/* { */
+		/* 	this.GetComponent<ShieldBuff>().enabled = false; */
+		/* } */
+		/* else */
+		/* { */
+		/* 	this.Die(attackingHero); */
+		/* } */
 	}
+
+    public void Shot (Hero attackingHero)
+    {
+        // Logic here to kill this.Hero via projectile
+    }
+
 
 	void Die(Hero attackingHero)
 	{
