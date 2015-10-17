@@ -50,6 +50,8 @@ public class Hero : MonoBehaviour
 	public GUIText HUDText;
 	public float TimeAtMaxSize;
 
+	public bool hasPowerup = false;
+
 	private HeroController HeroController;
 
 	public float ProjectileLaunchVelocity;
@@ -82,6 +84,7 @@ public class Hero : MonoBehaviour
 
 	void Start ()
 	{
+		this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
 		this.HeroController = this.GetComponent<HeroController>();
 		this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
 		this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
@@ -201,9 +204,18 @@ public class Hero : MonoBehaviour
 			scoreKeeper.GetComponent<ScoreKeeper>().ResetGame();
 		}
 
-		if (Time.time > this.TimeTillNotAccelerated)
+		// check powerups
+		if(hasPowerup)
 		{
-
+			if (this.TimeTillNotAccelerated != 0)
+			{
+				if (Time.time > this.TimeTillNotAccelerated)
+				{
+				this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
+				this.TimeTillNotAccelerated = 0;
+				hasPowerup = false;
+				}
+			}
 		}
 
 		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
@@ -247,7 +259,6 @@ public class Hero : MonoBehaviour
 
         // Sets threshold to true if at a velocity that kills another player
         this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
-        Debug.Log("\nAboveThreshold: " + this.AboveThreshold + "\nObject Magnitude: " + this.velocity.magnitude);
 	}
 
 	void accelerateByVector(float x_component, float y_component)
@@ -255,7 +266,13 @@ public class Hero : MonoBehaviour
 		this.velocity = new Vector2 (this.velocity.x + x_component, this.velocity.y + y_component);
 	}
 
-	public float scalarAccelerationModifier = 0.4f; // SHOULD BE SET IN START
+	void accelerateByScalar(float scalar)
+	{
+		this.velocity = new Vector2 (this.velocity.x * scalar, this.velocity.y * scalar);
+	}
+
+	public float defaultScalarAccelerationModifier = 0.4f; // SHOULD BE SET IN START
+	public float scalarAccelerationModifier;
 	public float StaticMargin = 0.4f;
 	public float FallingMargin = 0.5f;
 	public float MaxNewSpeed = 50.0f;

@@ -17,7 +17,7 @@ public class Pickup : MonoBehaviour
 
 	public Type PickupType;
 
-	public int timeTillResetAcc = 100;
+	public int secTillResetAccPowerup = 5; // in seconds
 	public float MassiveAccelerationValue = 0.6f;
 	public float MassiveDecelerationValue = 0.2f;
 
@@ -44,9 +44,8 @@ public class Pickup : MonoBehaviour
 		var hero = other.gameObject.GetComponent<Hero>();
 		if (hero == null)
 			return;
-
-		Debug.Log(this.PickupType.ToString());
-
+		else
+			hero.hasPowerup = true;
 		switch(this.PickupType)
 		{
 			case Type.Shield:
@@ -56,13 +55,13 @@ public class Pickup : MonoBehaviour
 			}
 			case Type.MassiveAccel:
 			{
-				hero.TimeTillNotAccelerated = Time.time + timeTillResetAcc;
+				hero.TimeTillNotAccelerated = Time.time + secTillResetAccPowerup;
 				hero.scalarAccelerationModifier = MassiveAccelerationValue;
 				break;
 			}
 			case Type.MassiveDecel:
 			{
-				hero.TimeTillNotAccelerated = Time.time + timeTillResetAcc;
+				hero.TimeTillNotAccelerated = Time.time + secTillResetAccPowerup;
 				hero.scalarAccelerationModifier = MassiveDecelerationValue;
 				break;
 			} 
