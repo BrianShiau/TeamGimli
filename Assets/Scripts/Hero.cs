@@ -197,6 +197,12 @@ public class Hero : MonoBehaviour
 				else
 					newRotation = 360 + 180 / (float)Math.PI * (float)Math.Sin ((float)newX / (float)newY);
 			}
+			if(newX==0){
+				if(newY>0)
+					newRotation = 0;
+				else
+					newRotation = 180;
+			}
 		}
 		else{
 			newRotation = newX > 0 ? 90 : 270;
@@ -209,6 +215,11 @@ public class Hero : MonoBehaviour
 
         // Sets threshold to true if at a velocity that kills another player
         this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
+		if (this.AboveThreshold) {
+			body.gameObject.GetComponent<Renderer> ().material.color = Color.yellow;
+		} else {
+			body.gameObject.GetComponent<Renderer> ().material.color = Color.white;
+		}
 	}
 
 	void accelerateByVector(float x_component, float y_component)
