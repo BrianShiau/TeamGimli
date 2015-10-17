@@ -79,6 +79,7 @@ public class Hero : MonoBehaviour
 
 	void Start ()
 	{
+		this.scalarAccelerationModifier = 0.5f;
 		this.HeroController = this.GetComponent<HeroController>();
 		this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
 		this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
@@ -198,15 +199,15 @@ public class Hero : MonoBehaviour
 			scoreKeeper.GetComponent<ScoreKeeper>().ResetGame();
 		}
 
-
-		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * myAcceleration);
-		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * myAcceleration);
+		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
+		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
+		Debug.Log(scalarAccelerationModifier);
 		this.velocity = new Vector2 (newX, newY);
 	}
 
+	public float scalarAccelerationModifier; // MUST BE SET IN START
 	public float StaticMargin = 0.4f;
 	public float FallingMargin = 0.5f;
-	public float myAcceleration = 50.0f;
 	public float MaxNewSpeed = 50.0f;
 
 	private Rect box;
