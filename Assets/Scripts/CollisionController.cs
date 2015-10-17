@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class CollisionController : MonoBehaviour {
   private float radius=0.5f;
   private float x,y;
-  private float distanceFactor=1f;
   private float maxX, minX, maxY, minY;
   
   private Hero thisHero;
@@ -31,64 +31,44 @@ public class CollisionController : MonoBehaviour {
 	      GameObject obj = cont.gameObject;
 	      if(obj != this.gameObject)//if not this object
 	      {
-	        Vector2 thisVelocity = thisHero.velocity; //this collision controller
-	        float thisX = gameObject.transform.position.x;
-	        float thisY = gameObject.transform.position.y;
-	        
-	        otherHero = obj.GetComponent<Hero>(); //the other collision controller
-	        Vector2 otherVelocity = otherHero.velocity;
-	        float otherX = obj.transform.position.x;
-	        float otherY = obj.transform.position.y;
-	        
-	        Vector3 linePoint1 = new Vector3(thisX, thisY, 0); //input for line line intersection
-	        Vector3 lineVec1 = new Vector3(thisVelocity.x * distanceFactor, thisVelocity.y * distanceFactor, 0);
-	        Vector3 linePoint2 = new Vector3(otherX, otherY, 0);
-	        Vector3 lineVec2 = new Vector3(otherVelocity.x * distanceFactor, otherVelocity.y * distanceFactor, 0);
-	        Vector3 intersection;
-	        if(LineLineIntersection(out intersection,linePoint1,lineVec1,linePoint2,lineVec2)){ //collision detected
-	          //reverse directions
-	          Debug.Log("Collision");
-	          thisHero.velocity = new Vector2(-thisVelocity.x,-thisVelocity.y);
-	        }
-	        //if within walls
-	        //detect collision
+	        if(collision(obj)) {
+	        	this.thisHero.velocity = new Vector2(-thisHero.velocity.x, -thisHero.velocity.y);
+	        	Vector2 vel = obj.GetComponent<Hero>().velocity; //the other collision controller
+	        	obj.GetComponent<Hero>().velocity = new Vector2(-vel.x, -vel.y);
+	        }	        
 	      }
 	    }
     
 	}
-  
-  //Calculate the intersection point of two lines. Returns true if lines intersect, otherwise false.
-	//Note that in 3d, two lines do not intersect most of the time. So if the two lines are not in the 
-	//same plane, use ClosestPointsOnTwoLines() instead.
-	public static bool LineLineIntersection(out Vector3 intersection, Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2){
- 
-		intersection = Vector3.zero;
- 
-		Vector3 lineVec3 = linePoint2 - linePoint1;
-		Vector3 crossVec1and2 = Vector3.Cross(lineVec1, lineVec2);
-		Vector3 crossVec3and2 = Vector3.Cross(lineVec3, lineVec2);
- 
-		float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
- 
-		//Lines are not coplanar. Take into account rounding errors.
-		if((planarFactor >= 0.00001f) || (planarFactor <= -0.00001f)){
- 
-			return false;
-		}
- 
-		//Note: sqrMagnitude does x*x+y*y+z*z on the input vector.
-		float s = Vector3.Dot(crossVec3and2, crossVec1and2) / crossVec1and2.sqrMagnitude;
- 
-		if((s >= 0.0f) && (s <= 1.0f)){
- 
-			intersection = linePoint1 + (lineVec1 * s);
-			return true;
-		}
- 
-		else{
-			return false;       
-		}
-	}
+  	
+ 	bool collision(GameObject obj) {
+        float length = thisHero.velocity.magnitude;
+        float distanceFactor = 1/(1.5f * length);
+
+		Vector2 velocity = thisHero.velocity * distanceFactor; //this collision controller
+        float startX = gameObject.transform.position.x;
+        float startY = gameObject.transform.position.y;
+        float endX = startX + velocity.x;
+        float endY = startY + velocity.y;
+
+        Vector2 direction = velocity.normalized;
+
+        otherHero = obj.GetComponent<Hero>(); //the other collision controller
+        float centerX = obj.transform.position.x;
+        float centerY = obj.transform.position.y;
+
+        float t = (direction.x * (centerX - startX)) + (direction.y * (centerY - startY));
+
+        Vector2 closest = new Vector2(t * (direction.x + startX), t * (direction.y + startY));
+
+        double distance = Math.Sqrt(Math.Pow(closest.x - centerX, 2) + Math.Pow(closest.y - centerY, 2));
+
+        if(distance <= radius) {
+        	return true;
+        }
+
+        return false;
+ 	}
 
 	void DetectEdge() {
 		float thisX = gameObject.transform.position.x;
@@ -109,6 +89,17 @@ public class CollisionController : MonoBehaviour {
 			Vector3 pos = new Vector3(thisX, thisY, 0);
 			gameObject.transform.position = pos;
 			this.thisHero.velocity = new Vector2(thisVelocity.x, -thisVelocity.y);
+		}
+	}
+
+	void OnGUI() {
+		bool debug = false;
+
+		if(debug){
+			Vector3 pos = gameObject.transform.position;
+			Vector2 velocity = this.thisHero.velocity;
+			Drawing.DrawLine (Camera.main, pos, new Vector3(pos.x + velocity.x, pos.y + velocity.y, 0), Color.red, 2f);
+			Drawing.DrawCircle(Camera.main, pos, radius, Color.red, 2f, Vector2.one);
 		}
 	}
 
