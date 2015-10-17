@@ -43,9 +43,10 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11444368}
   m_Layer: 0
   m_Name: Hero
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,6 +203,7 @@ Transform:
   m_RootOrder: 3
 --- !u!50 &5000000
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -210,11 +212,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 2
-  m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -239,32 +241,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6acd4c884b7c4b5c9db3d432e5951e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 5
-  MoveForce: 35
-  JumpForce: 1000
-  StompForce: 1000
   ScaleAdjustment: 1
   ScaleIterations: 5
-  HUDPosition: {x: 15, y: 35}
+  SpawnMagnitude: 0
   GroundDetector: {fileID: 100000}
-  ScreenEdgeDetector: {fileID: 100006}
   ProjectileEmitLocator: {fileID: 148220}
   ChannelLocator: {fileID: 100008}
   CounterLocator: {fileID: 158696}
   Projectile: {fileID: 100000, guid: bbfe1742032334cdca96228680379636, type: 2}
+  ProjectileExplosion: {fileID: 0}
   StunVisual: {fileID: 100000, guid: 13a62619e9de440989955c15fd635069, type: 2}
   ChannelVisual: {fileID: 100000, guid: b92ba7190135c40e0818e81d8b7878ff, type: 2}
   MaxGrowthVisual: {fileID: 100000, guid: b84a13b246f614ac4b6284dbc234a8e7, type: 2}
-  RenderingCamera: {fileID: 0}
+  body: {fileID: 0}
+  EnableDoubleJump: 0
+  AboveThreshold: 0
+  Threshold: 1
   ChannelTime: 2.5
   RespawnTime: 5
+  RespawnTimeIncreasePerDeath: 0
   StunTime: 1
-  PlayerIndex: 1
+  JumpForgivenessTimeAmount: 0
   HUDText: {fileID: 13234722, guid: 05cb476ad74084b6c8b1f911d9292899, type: 2}
   TimeAtMaxSize: 0
-  ProjectileLaunchForce: {x: 700, y: 0}
+  hasPowerup: 0
+  ProjectileLaunchVelocity: 0
   ProjectileDelay: 1
+  BodySprites: []
+  ProjectileSprites: []
+  ProjectileExplosions: []
   ProjectileSprite: {fileID: 21300000, guid: 25913286cebd94ba88c9d642fc1ba721, type: 3}
+  ProjectileExplosionSprite: {fileID: 0}
+  defaultScalarAccelerationModifier: .400000006
+  scalarAccelerationModifier: .400000006
+  StaticMargin: .400000006
+  FallingMargin: .5
+  MaxNewSpeed: 50
+  TimeTillNotAccelerated: 0
+  velocity: {x: 0, y: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +288,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d906238c70e5243579e3b0ccc58b0bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNumber: 0
+--- !u!114 &11444368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b623c5ea31d141d4bb7ec94f7fc243a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &21200000
@@ -308,7 +334,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100004}
