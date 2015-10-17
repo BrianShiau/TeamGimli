@@ -22,6 +22,11 @@ public class PickupGenerator : MonoBehaviour
 		{
 			var child = t.GetChild (i);
 			this.SpawnPoints[i] = new Vector2 (child.transform.position.x, child.transform.position.y);
+      
+      var go = GameObject.Instantiate (this.randomPickup, RandomExt.Pick (this.SpawnPoints), Quaternion.identity) as GameObject;
+      var pickup = go.GetComponent<Pickup>();
+      pickup.ExpirationTime = Time.time + this.TimeToLive;
+      pickup.StartBlinkTime = pickup.ExpirationTime - this.TimeToBlink;
 		}
 	}
 
