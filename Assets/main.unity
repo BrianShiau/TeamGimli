@@ -790,6 +790,10 @@ Prefab:
       propertyPath: m_Name
       value: Hero[1]
       objectReference: {fileID: 0}
+    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
+      propertyPath: scalarAccelerationModifier
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
   m_IsPrefabParent: 0
@@ -1050,6 +1054,14 @@ Prefab:
     - target: {fileID: 197322, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
       propertyPath: m_Name
       value: Location 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 415996, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 9.26000023
+      objectReference: {fileID: 0}
+    - target: {fileID: 415996, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.55999994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
