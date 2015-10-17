@@ -199,7 +199,9 @@ public class Hero : MonoBehaviour
 		}
 
 
-		this.velocity = new Vector2 (this.HeroController.HorizontalMovementAxis * this.MaxNewSpeed, this.velocity.y);
+		int newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.Acceleration);
+		int newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.Acceleration)
+		this.velocity = new Vector2 (newX, newY);
 	}
 
 	public float StaticMargin = 0.4f;
