@@ -36,7 +36,7 @@ public class HeroController : MonoBehaviour
 	public float VerticalMovementAxis
 	{
 		get
-		{	i
+		{	
 			InputDevice inputDevice = this.InputDevice;
 			return (inputDevice != null) ? inputDevice.LeftStickY : (this.PlayerNumber == 1 ? Input.GetAxis ("Vertical") : 0.0f);
 		}
