@@ -199,8 +199,8 @@ public class Hero : MonoBehaviour
 		}
 
 
-		int newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.Acceleration);
-		int newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.Acceleration);
+		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.Acceleration);
+		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.Acceleration);
 		this.velocity = new Vector2 (newX, newY);
 	}
 
