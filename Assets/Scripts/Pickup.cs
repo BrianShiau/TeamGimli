@@ -19,7 +19,7 @@ public class Pickup : MonoBehaviour
 
 	public int secTillResetAccPowerup = 5; // in seconds
 	public float MassiveAccelerationValue = 0.6f;
-	public float MassiveDecelerationValue = 0.2f;
+	public float MassiveDecelerationValue = 0.02f;
 
 	public float ExpirationTime;
 	public float StartBlinkTime;
@@ -53,6 +53,7 @@ public class Pickup : MonoBehaviour
 		{
 			Debug.Log(hero.name + " picked up: " + this.PickupType.ToString());
 			hero.hasPowerup = true;
+            hero.SetPowerup(this);
 		}
 
 		switch(this.PickupType)

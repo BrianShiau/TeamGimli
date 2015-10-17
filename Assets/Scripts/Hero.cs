@@ -50,7 +50,19 @@ public class Hero : MonoBehaviour
 	public GUIText HUDText;
 	public float TimeAtMaxSize;
 
+    // Types of powerups
+	public enum Type
+	{
+		Shield,
+		MassiveAccel,
+		MassiveDecel,
+		StickyPad,
+		GrapplingHook,
+		StopGun,
+		AlterThreshold
+	}
 	public bool hasPowerup = false;
+    public string powerupName = "none";
 
 	private HeroController HeroController;
 
@@ -132,19 +144,28 @@ public class Hero : MonoBehaviour
 				this.Respawn ();
 			}
 		}
+        if (this.HeroController.Shooting && this.hasPowerup &&
+                this.powerupName == "MassiveAccel")
+        {
+            Debug.Log("Shooting Stop Gun");
+        }
 
-		if (this.HeroController.Shooting && this.TimeUntilNextProjectile < 0.0f)
-		{
-			this.TimeUntilNextProjectile = this.ProjectileDelay;
-			GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity);
-			projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite;
-			projectile.GetComponent<Projectile>().OwnerHero = this;
-			projectile.transform.localScale = this.transform.localScale;
-			float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity;
-			projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f);
-			SoundFX.Instance.OnHeroFire(this);
-			Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
-		}
+        else if (this.HeroController.Shooting)
+        {
+            Debug.Log("You can't shoot bish!!!");
+        }
+        /* else if (this.HeroController.Shooting && this.TimeUntilNextProjectile < 0.0f) */
+		/* { */
+			/* this.TimeUntilNextProjectile = this.ProjectileDelay; */
+			/* GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity); */
+			/* projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite; */
+			/* projectile.GetComponent<Projectile>().OwnerHero = this; */
+			/* projectile.transform.localScale = this.transform.localScale; */
+			/* float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity; */
+			/* projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f); */
+			/* SoundFX.Instance.OnHeroFire(this); */
+			/* Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>()); */
+		/* } */
 
 		if (this.HeroController.GetResetGame)
 		{
@@ -338,6 +359,13 @@ public class Hero : MonoBehaviour
 		/* 	this.Die(attackingHero); */
 		/* } */
 	}
+
+    public void SetPowerup (Pickup pickup)
+    {
+        Debug.Log(pickup.PickupType.ToString());
+        this.powerupName = pickup.PickupType.ToString();
+    }
+
 
     public void Shot (Hero attackingHero)
     {
