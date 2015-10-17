@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 public class CollisionController : MonoBehaviour {
-  private float radius=0.5f;
+  private float radius=0.8f;
   private float x,y;
   private float maxX, minX, maxY, minY;
   
@@ -32,9 +32,9 @@ public class CollisionController : MonoBehaviour {
 	      if(obj != this.gameObject)//if not this object
 	      {
 	        if(collision(obj)) {
-	        	this.thisHero.velocity = new Vector2(-thisHero.velocity.x, -thisHero.velocity.y);
-	        	Vector2 vel = obj.GetComponent<Hero>().velocity; //the other collision controller
-	        	obj.GetComponent<Hero>().velocity = new Vector2(-vel.x, -vel.y);
+            // These objects collided
+                Hero otherHero = obj.GetComponent<Hero>();
+                thisHero.Hit(otherHero);
 	        }	        
 	      }
 	    }
@@ -93,7 +93,7 @@ public class CollisionController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		bool debug = false;
+		bool debug = true;
 
 		if(debug){
 			Vector3 pos = gameObject.transform.position;

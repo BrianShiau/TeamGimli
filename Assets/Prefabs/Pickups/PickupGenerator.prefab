@@ -183,7 +183,7 @@ MonoBehaviour:
   - {fileID: 186600, guid: 59e26dee58ef647cb9d89ced548de02e, type: 2}
   - {fileID: 186600, guid: 6023d5aa4bbcd4486bc01db8c2e95a41, type: 2}
   TimeBetween: 15
-  MaxSimultaneous: 2
+  MaxSimultaneous: 6
   TimeToLive: 10
   TimeToBlink: 3
 --- !u!1001 &100100000
@@ -201,6 +201,10 @@ Prefab:
       propertyPath: Pickups.Array.data[1]
       value: 
       objectReference: {fileID: 186600, guid: 7f174bd0dffc6064cbc8286c3afa58b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: MaxSimultaneous
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132786}

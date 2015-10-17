@@ -34,7 +34,7 @@ public class Hero : MonoBehaviour
 	public GameObject body;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
-    public float Threshold = 15.0f;
+    public float Threshold = 400.0f;
 	public float ChannelTime;
 	public float RespawnTime;
 	public float RespawnTimeIncreasePerDeath;
@@ -351,6 +351,17 @@ public class Hero : MonoBehaviour
             this.Die(null);
         }
 
+        else if (this.AboveThreshold && attackingHero.AboveThreshold)
+        {
+            if (this.velocity.magnitude > attackingHero.velocity.magnitude)
+            {
+                attackingHero.Die(null);
+            }
+            else
+            {
+                this.Die(null);
+            }
+        }
         // Neither of the colliding heroes are fast enough to kill, so they reverse their direction
         else
         {

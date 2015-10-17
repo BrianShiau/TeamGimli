@@ -256,7 +256,7 @@ MonoBehaviour:
   body: {fileID: 0}
   EnableDoubleJump: 0
   AboveThreshold: 0
-  Threshold: 1
+  Threshold: 300
   ChannelTime: 2.5
   RespawnTime: 5
   RespawnTimeIncreasePerDeath: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   HUDText: {fileID: 13234722, guid: 05cb476ad74084b6c8b1f911d9292899, type: 2}
   TimeAtMaxSize: 0
   hasPowerup: 0
+  powerupName: none
   ProjectileLaunchVelocity: 0
   ProjectileDelay: 1
   BodySprites: []
@@ -338,6 +339,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: radius
+      value: .800000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Threshold
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
