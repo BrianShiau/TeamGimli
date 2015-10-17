@@ -1,11 +1,16 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 guid: 673f74cce20f84102a870835cecea9c6
 timeCreated: 1445120232
 =======
 guid: 127675e42983649a19e343e4d945c240
 timeCreated: 1445121136
 >>>>>>> 9ff832088d04c5d595d8b074038bbab8e3fd6c52
+=======
+guid: 0fc3db8995ec1443795dc7a440f4494c
+timeCreated: 1445119236
+>>>>>>> Redid collision the right way
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -36,10 +41,14 @@ TextureImporter:
   textureSettings:
     filterMode: -1
 <<<<<<< HEAD
+<<<<<<< HEAD
     aniso: 16
 =======
     aniso: -1
 >>>>>>> 9ff832088d04c5d595d8b074038bbab8e3fd6c52
+=======
+    aniso: -1
+>>>>>>> Redid collision the right way
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -47,9 +56,12 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   allowsAlphaSplitting: 0
 >>>>>>> 9ff832088d04c5d595d8b074038bbab8e3fd6c52
+=======
+>>>>>>> Redid collision the right way
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
