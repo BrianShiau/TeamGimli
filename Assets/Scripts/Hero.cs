@@ -79,7 +79,7 @@ public class Hero : MonoBehaviour
 
 	void Start ()
 	{
-		this.scalarAccelerationModifier = 0.5f;
+		this.scalarAccelerationModifier = 0.1f;
 		this.HeroController = this.GetComponent<HeroController>();
 		this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
 		this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
