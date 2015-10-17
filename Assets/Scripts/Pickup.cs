@@ -41,10 +41,10 @@ public class Pickup : MonoBehaviour
 		{
 			ShieldBuff.AddToHero (hero);
 		}
-		else
-		{
-			hero.Grow(true);
-		}
+		// else
+		// {
+		// 	hero.Grow(true);
+		// }
 		GameObject.Destroy (this.gameObject);
 	}
 }

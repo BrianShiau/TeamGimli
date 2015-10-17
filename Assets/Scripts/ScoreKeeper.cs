@@ -14,39 +14,6 @@ public class ScoreKeeper : MonoBehaviour
 
 	Hero FindWinningPlayer()
 	{
-		int highestSize = 0;
-		List<Hero> highestPlayers = new List<Hero>();
-
-		Hero[] heroes = FindObjectsOfType(typeof(Hero)) as Hero[];
-		foreach (Hero hero in heroes)
-		{
-			if (!hero.IsAlive())
-			{
-				continue;
-			}
-
-			int growStage = hero.GetGrowStage();
-
-			if (growStage > highestSize)
-			{
-				highestPlayers = new List<Hero>();
-				highestPlayers.Add(hero);
-				highestSize = growStage;
-			}
-			else if (growStage > 0 && growStage == highestSize)
-			{
-				highestPlayers.Add(hero);
-			}
-		}
-
-		if (highestPlayers.Count == 1)
-		{
-			if (((Hero)highestPlayers[0]).ScaleIterations == highestSize)
-			{
-				return highestPlayers[0];
-			}
-		}
-
 		return null;
 	}
 
@@ -77,33 +44,7 @@ public class ScoreKeeper : MonoBehaviour
 
 	void Update()
 	{
-		if (this.WinningHero != null)
-		{
-			return;
-		}
-
-		Hero hero = this.FindWinningPlayer();
-		if (hero != null)
-		{
-			if (this.HeroAboutToWin != hero)
-			{
-				this.StopHeroAboutToWinSound();
-				this.StartHeroAboutToWinSound(hero);
-			}
-
-			this.HeroAboutToWin = hero;
-			hero.TimeAtMaxSize += Time.deltaTime;
-			if (hero.TimeAtMaxSize >= this.TimeToWin)
-			{
-				this.WinningHero = hero;
-				this.StopHeroAboutToWinSound();
-				this.PlayVictorySound(this.WinningHero);
-			}
-		}
-		else
-		{
-			this.StopHeroAboutToWinSound();
-		}
+		
 	}
 
 	public void ResetGame()
