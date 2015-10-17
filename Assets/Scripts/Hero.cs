@@ -34,7 +34,7 @@ public class Hero : MonoBehaviour
 	public GameObject body;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
-    public float Threshold = 1.0f;
+    public float Threshold = 15.0f;
 	public float ChannelTime;
 	public float RespawnTime;
 	public float RespawnTimeIncreasePerDeath;
@@ -326,12 +326,10 @@ public class Hero : MonoBehaviour
 
 	public void Hit (Hero attackingHero)
 	{
-        attackingHero.GetComponent<ShieldBuff>().enabled = false;
         Debug.Log("Hero shooting: " + attackingHero.PlayerIndex);
         Debug.Log("Who got shot: " + this.PlayerIndex);
-        attackingHero.Die(this);
-        Die(this);
-        return;
+        /* attackingHero.Die(this); */
+        /* Die(this); */
 		if (this == attackingHero || !this.IsAlive())
 		{
 			return;
@@ -348,6 +346,8 @@ public class Hero : MonoBehaviour
         // Hero that rammed this hero is fast enough to kill
         else if (!this.AboveThreshold && attackingHero.AboveThreshold)
         {
+            GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
+            projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
             this.Die(null);
         }
 
