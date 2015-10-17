@@ -32,6 +32,8 @@ public class Hero : MonoBehaviour
 	public GameObject ChannelVisual;
 	public GameObject MaxGrowthVisual;
 	public bool EnableDoubleJump;
+    public bool AboveThreshold = false;
+    public float Threshold = 1.0f;
 	public float ChannelTime;
 	public float RespawnTime;
 	public float RespawnTimeIncreasePerDeath;
@@ -203,6 +205,10 @@ public class Hero : MonoBehaviour
 		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
 		Debug.Log(scalarAccelerationModifier);
 		this.velocity = new Vector2 (newX, newY);
+
+        // Sets threshold to true if at a velocity that kills another player
+        this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
+        Debug.Log("\nAboveThreshold: " + this.AboveThreshold + "\nObject Magnitude: " + this.velocity.magnitude);
 	}
 
 	public float scalarAccelerationModifier; // MUST BE SET IN START
