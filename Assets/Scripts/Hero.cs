@@ -200,6 +200,11 @@ public class Hero : MonoBehaviour
 			scoreKeeper.GetComponent<ScoreKeeper>().ResetGame();
 		}
 
+		if (Time.time > this.TimeTillNotAccelerated)
+		{
+
+		}
+
 		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
 		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
 
@@ -222,8 +227,10 @@ public class Hero : MonoBehaviour
 	public float FallingMargin = 0.5f;
 	public float MaxNewSpeed = 50.0f;
 
+	public float TimeTillNotAccelerated = 0;
+
 	private Rect box;
-	private Vector2 velocity = Vector2.zero;
+	public Vector2 velocity = Vector2.zero;
 	private int groundMask;
 
 	void FixedUpdate ()

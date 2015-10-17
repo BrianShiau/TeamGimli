@@ -17,6 +17,7 @@ public class Pickup : MonoBehaviour
 
 	public Type PickupType;
 
+	public int timeTillResetAcc = 100;
 	public float MassiveAccelerationValue = 0.6f;
 	public float MassiveDecelerationValue = 0.2f;
 
@@ -55,11 +56,13 @@ public class Pickup : MonoBehaviour
 			}
 			case Type.MassiveAccel:
 			{
+				hero.TimeTillNotAccelerated = Time.time + timeTillResetAcc;
 				hero.scalarAccelerationModifier = MassiveAccelerationValue;
 				break;
 			}
 			case Type.MassiveDecel:
 			{
+				hero.TimeTillNotAccelerated = Time.time + timeTillResetAcc;
 				hero.scalarAccelerationModifier = MassiveDecelerationValue;
 				break;
 			} 
