@@ -17,6 +17,9 @@ public class Pickup : MonoBehaviour
 
 	public Type PickupType;
 
+	public float MassiveAccelerationValue = 0.6f;
+	public float MassiveDecelerationValue = 0.2f;
+
 	public float ExpirationTime;
 	public float StartBlinkTime;
 
@@ -47,15 +50,17 @@ public class Pickup : MonoBehaviour
 		{
 			case Type.Shield:
 			{
-				ShieldBuff.AddToHero (hero);
+				ShieldBuff.AddToHero (hero);	// TODO: Change the shieldbuff class
 				break;
 			}
 			case Type.MassiveAccel:
 			{
+				hero.scalarAccelerationModifier = MassiveAccelerationValue;
 				break;
 			}
 			case Type.MassiveDecel:
 			{
+				hero.scalarAccelerationModifier = MassiveDecelerationValue;
 				break;
 			} 
 			case Type.StickyPad:

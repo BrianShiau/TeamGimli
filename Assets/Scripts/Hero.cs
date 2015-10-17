@@ -202,7 +202,9 @@ public class Hero : MonoBehaviour
 
 		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
 		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
-		Debug.Log(scalarAccelerationModifier);
+
+		// INSERT YOUR STUFF HERE BRIAN
+
 		this.velocity = new Vector2 (newX, newY);
 
         // Sets threshold to true if at a velocity that kills another player
@@ -210,7 +212,12 @@ public class Hero : MonoBehaviour
         Debug.Log("\nAboveThreshold: " + this.AboveThreshold + "\nObject Magnitude: " + this.velocity.magnitude);
 	}
 
-	public float scalarAccelerationModifier = 0.1f; // SHOULD BE SET IN START
+	void accelerateByVector(float x_component, float y_component)
+	{
+		this.velocity = new Vector2 (this.velocity.x + x_component, this.velocity.y + y_component);
+	}
+
+	public float scalarAccelerationModifier = 0.4f; // SHOULD BE SET IN START
 	public float StaticMargin = 0.4f;
 	public float FallingMargin = 0.5f;
 	public float MaxNewSpeed = 50.0f;
