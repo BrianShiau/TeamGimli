@@ -81,7 +81,6 @@ public class Hero : MonoBehaviour
 
 	void Start ()
 	{
-		this.scalarAccelerationModifier = 0.1f;
 		this.HeroController = this.GetComponent<HeroController>();
 		this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
 		this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
@@ -211,7 +210,7 @@ public class Hero : MonoBehaviour
         Debug.Log("\nAboveThreshold: " + this.AboveThreshold + "\nObject Magnitude: " + this.velocity.magnitude);
 	}
 
-	public float scalarAccelerationModifier; // MUST BE SET IN START
+	public float scalarAccelerationModifier = 0.1f; // SHOULD BE SET IN START
 	public float StaticMargin = 0.4f;
 	public float FallingMargin = 0.5f;
 	public float MaxNewSpeed = 50.0f;
