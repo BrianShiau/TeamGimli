@@ -37,6 +37,9 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+--- !u!127 &3
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -65,7 +68,6 @@ LightmapSettings:
     m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -155,7 +157,6 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -696,7 +697,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1039,74 +1039,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 100072, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_Name
-      value: Location 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 168202, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_Name
-      value: Location 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 173592, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_Name
-      value: Location 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 163500, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_Name
-      value: Location 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 197322, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_Name
-      value: Location 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 415996, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 415996, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 462790, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 21.3999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 462790, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -9.89999962
-      objectReference: {fileID: 0}
-    - target: {fileID: 458698, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 21.1000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 458698, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 10.3999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 473756, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -20.2999992
-      objectReference: {fileID: 0}
-    - target: {fileID: 473756, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 10.3000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 408158, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -20.1000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 408158, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -11.8000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438212, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: Pickups.Array.data[0]
-      value: 
-      objectReference: {fileID: 186600, guid: e7ab03fcbb260094f8a0ae9dfe5b0e94, type: 2}
-    - target: {fileID: 11438212, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
-      propertyPath: Pickups.Array.data[1]
-      value: 
-      objectReference: {fileID: 186600, guid: 7f174bd0dffc6064cbc8286c3afa58b1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
   m_IsPrefabParent: 0
