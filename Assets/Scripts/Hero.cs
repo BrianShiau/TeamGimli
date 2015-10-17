@@ -31,6 +31,7 @@ public class Hero : MonoBehaviour
 	public GameObject StunVisual;
 	public GameObject ChannelVisual;
 	public GameObject MaxGrowthVisual;
+	public GameObject body;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
     public float Threshold = 1.0f;
@@ -208,8 +209,40 @@ public class Hero : MonoBehaviour
 		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
 		float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
 
-		// INSERT YOUR STUFF HERE BRIAN
-
+		float newRotation = 0;
+		if (newY != 0) {
+			if(newY>0 && newX>0){
+				if(Math.Abs(newY)>Math.Abs(newX))
+					newRotation = 180 / (float)Math.PI * (float)Math.Sin ((float)newX / (float)newY);
+				else
+					newRotation = 90 - 180 / (float)Math.PI * (float)Math.Sin ((float)newY / (float)newX);
+			}
+			if(newY<0 && newX>0){
+				if(Math.Abs(newY)<Math.Abs(newX))
+					newRotation = 90 - 180 / (float)Math.PI * (float)Math.Sin ((float)newY / (float)newX);
+				else
+					newRotation = 180 + 180 / (float)Math.PI * (float)Math.Sin ((float)newX / (float)newY);
+			}
+			if(newY<0 && newX<0){
+				if(Math.Abs(newY)>Math.Abs(newX))
+					newRotation = 180 + 180 / (float)Math.PI * (float)Math.Sin ((float)newX / (float)newY);
+				else
+					newRotation = 270 - 180 / (float)Math.PI * (float)Math.Sin ((float)newY / (float)newX);
+			}
+			if(newY>0 && newX<0){
+				if(Math.Abs(newY)<Math.Abs(newX))
+					newRotation = 270 - 180 / (float)Math.PI * (float)Math.Sin ((float)newY / (float)newX);
+				else
+					newRotation = 360 + 180 / (float)Math.PI * (float)Math.Sin ((float)newX / (float)newY);
+			}
+		}
+		else{
+			newRotation = newX > 0 ? 90 : 270;
+			if (newX==0)
+				newRotation = 0;
+		}
+		body.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -newRotation));
+		
 		this.velocity = new Vector2 (newX, newY);
 
         // Sets threshold to true if at a velocity that kills another player
@@ -283,8 +316,8 @@ public class Hero : MonoBehaviour
 
 	void Flip ()
 	{
-		this.FacingRight = !this.FacingRight;
-		this.scale = this.scale;
+		//this.FacingRight = !this.FacingRight;
+		//this.scale = this.scale;
 	}
 
 	public bool IsAlive()
