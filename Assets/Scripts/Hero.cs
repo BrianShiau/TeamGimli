@@ -459,7 +459,6 @@ public class Hero : MonoBehaviour
         Destroy(this.MaxSizeSound);
 
         SoundFX.Instance.OnHeroDies(this);
-        CurrentWinner = false;
 
         Destroy(gameObject);
     }
