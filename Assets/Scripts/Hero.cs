@@ -39,6 +39,7 @@ public class Hero : MonoBehaviour
     public GameObject body3;
     public bool EnableDoubleJump;
     public bool AboveThreshold = false;
+    public float AlterThresholdTimer = 5.0f;
     private float Threshold = 30.0f;
     private float DefaultThresholdModifier = 1.0f;
     public float ThresholdModifier;
@@ -70,7 +71,7 @@ public class Hero : MonoBehaviour
         AlterThreshold
     }
     public bool hasPowerup = false;
-    public string powerupName = "StopGun";
+    public string powerupName = "none";
 
     private HeroController HeroController;
 
@@ -154,8 +155,25 @@ public class Hero : MonoBehaviour
         }
     }
 
+    public void ResetPowerupName(string powerup)
+    {
+        this.powerupName = "none";
+    }
+
     void Update ()
     {
+        /* Debug.Log(powerupName); */
+        if (this.powerupName == "AlterThreshold" && this.AlterThresholdTimer < 0.0f)
+        {
+            this.AlterThresholdTimer = 5.0f; 
+            this.powerupName = "none";
+            body.gameObject.GetComponent<Renderer>().material.color = Color.white;
+        }
+        else if (this.powerupName == "AlterThreshold")
+        {
+            body.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+
         if (this.HeroController.Shooting && /*this.hasPowerup &&*/
                 this.powerupName == "StopGun")
         {
@@ -183,7 +201,7 @@ public class Hero : MonoBehaviour
         }
 
         // To avoid being dampened by wall, "jump"
-        else if (this.HeroController.Jump /*&& this.TimeUntilNextBuffer < 0.0f*/)
+        else if (this.HeroController.Jump)
         {
             Debug.Log("Cooldown: " + this.TimeUntilNextBuffer);
             if (this.TimeUntilNextBuffer < 0.0f)
@@ -194,18 +212,6 @@ public class Hero : MonoBehaviour
                 ShieldBuff buffer = this.GetComponent<ShieldBuff>();
                 buffer.enabled = true;
             }
-            /* buffer.OnEnable(); */
-            /* ShieldBuff.AddOnHero(this); */
-            /* this.GetComponent<ShieldBuff>().enabled; */
-            /* this.GetComponent<ShieldBuff>().AddOnHero(this); */
-            /* if (this.GetComponent<ShieldBuff>().enabled) */
-            /* { */
-            /*  this.GetComponent<ShieldBuff>().enabled = false; */
-            /* } */
-            /* else */
-            /* { */
-            /*  this.Die(null); */
-            /* } */
         }
 
         if (this.HeroController.GetResetGame)
@@ -344,6 +350,7 @@ public class Hero : MonoBehaviour
 
         this.TimeUntilNextProjectile -= Time.fixedDeltaTime;
         this.TimeUntilNextBuffer -= Time.fixedDeltaTime;
+        this.AlterThresholdTimer -= Time.fixedDeltaTime;
 
         this.transform.Translate (this.velocity * Time.fixedDeltaTime);
     }
