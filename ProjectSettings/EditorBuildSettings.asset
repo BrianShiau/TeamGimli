@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/Levels/level1.unity
   - enabled: 0
     path: Assets/Levels/titlescreen.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/main.unity
