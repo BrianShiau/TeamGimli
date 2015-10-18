@@ -21,7 +21,10 @@ public class ShieldBuff : MonoBehaviour {
 
         if (this.BufferLifetime < 0.0f)
         {
-            Destroy (this.gameObject);
+            Debug.Log("KILLING: "+this);
+            /* this.OnDisable(); */
+            this.enabled = false;
+            /* Destroy (this); */
         }
     }
 

@@ -70,7 +70,7 @@ public class Hero : MonoBehaviour
 	public float ProjectileDelay;
 	private float TimeUntilNextProjectile = 0.0f;
     public float BufferDelay = 3.0f;
-    public float TimeUntilNextBuffer = 0.0f;
+    public float TimeUntilNextBuffer = 3.0f;
 
 	private bool FacingRight = true;
 
@@ -159,14 +159,15 @@ public class Hero : MonoBehaviour
         }
 
         // To avoid being dampened by wall, "jump"
-        else if (this.HeroController.Jump)
+        else if (this.HeroController.Jump && this.TimeUntilNextBuffer < 0.0f)
         {
             this.TimeUntilNextBuffer = this.BufferDelay;
             // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
             Debug.Log("Activating wall buffer!!!");
-            Debug.Log("\nBuffer Cooldown: " + this.BufferDelay); 
+            Debug.Log("\nBuffer Cooldown: " + this.TimeUntilNextBuffer); 
             ShieldBuff buffer = this.GetComponent<ShieldBuff>();
-            buffer.enabled = true;
+            ShieldBuff.AddToHero(this);
+            /* buffer.OnEnable(); */
             /* ShieldBuff.AddOnHero(this); */
             /* this.GetComponent<ShieldBuff>().enabled; */
             /* this.GetComponent<ShieldBuff>().AddOnHero(this); */
@@ -365,7 +366,6 @@ public class Hero : MonoBehaviour
 
     public void SetPowerup (Pickup pickup)
     {
-        // Debug.Log(pickup.PickupType.ToString());
         this.powerupName = pickup.PickupType.ToString();
     }
 
