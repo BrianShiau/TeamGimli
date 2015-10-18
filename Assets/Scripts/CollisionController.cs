@@ -20,13 +20,13 @@ public class CollisionController : MonoBehaviour {
 	  	radius = 1.7f;
 	  } else if(type == "Player") {
 	    radius = 1.3f;
-	  } else {
+	  } else if(type == "Wall") {
 	  	border = new Vector2(0, 0);
 	  }
 
 
-	  maxX = 28.0f;
-	  minX = -28.0f;
+	  maxX = 24.0f;
+	  minX = -24.0f;
 	  maxY = 12.5f;
 	  minY = -12.5f;
 	}
