@@ -32,9 +32,6 @@ public class Hero : MonoBehaviour
 	public GameObject ChannelVisual;
 	public GameObject MaxGrowthVisual;
 	public GameObject body;
-	public GameObject body1;
-	public GameObject body2;
-	public GameObject body3;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
     private float Threshold = 30.0f;
@@ -72,8 +69,6 @@ public class Hero : MonoBehaviour
 	public float ProjectileLaunchVelocity;
 	public float ProjectileDelay;
 	private float TimeUntilNextProjectile = 0.0f;
-    public float BufferCooldown = 10.0f;
-    private float TimeUntilNextBuffer = 0.0f;
 
 	private bool FacingRight = true;
 
@@ -161,30 +156,9 @@ public class Hero : MonoBehaviour
 
         }
 
-        // To avoid being dampened by wall, "jump"
-        else if (this.HeroController.Jump /*&& this.TimeUntilNextBuffer < 0.0f*/)
+        else if (this.HeroController.Jump)
         {
-            Debug.Log("Cooldown: " + this.TimeUntilNextBuffer);
-            if (this.TimeUntilNextBuffer < 0.0f)
-            {
-                this.TimeUntilNextBuffer = this.BufferCooldown;
-                // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
-                Debug.Log("Activating wall buffer!!!");
-                ShieldBuff buffer = this.GetComponent<ShieldBuff>();
-                buffer.enabled = true;
-            }
-            /* buffer.OnEnable(); */
-            /* ShieldBuff.AddOnHero(this); */
-            /* this.GetComponent<ShieldBuff>().enabled; */
-            /* this.GetComponent<ShieldBuff>().AddOnHero(this); */
-            /* if (this.GetComponent<ShieldBuff>().enabled) */
-            /* { */
-            /* 	this.GetComponent<ShieldBuff>().enabled = false; */
-            /* } */
-            /* else */
-            /* { */
-            /* 	this.Die(null); */
-            /* } */
+            // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
         }
 
 		if (this.HeroController.GetResetGame)
@@ -257,35 +231,11 @@ public class Hero : MonoBehaviour
         // Sets threshold to true if at a velocity that kills another player
         this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
 		if (this.AboveThreshold) {
-			if(this.PlayerIndex==1){
-				body.GetComponent<TrailRenderer>().enabled = true;
-				body1.GetComponent<TrailRenderer>().enabled = false;
-				body2.GetComponent<TrailRenderer>().enabled = false;
-				body3.GetComponent<TrailRenderer>().enabled = false;
-			}
-			if(this.PlayerIndex==2){
-				body.GetComponent<TrailRenderer>().enabled = false;
-				body1.GetComponent<TrailRenderer>().enabled = true;
-				body2.GetComponent<TrailRenderer>().enabled = false;
-				body3.GetComponent<TrailRenderer>().enabled = false;
-			}
-			if(this.PlayerIndex==3){
-				body.GetComponent<TrailRenderer>().enabled = false;
-				body1.GetComponent<TrailRenderer>().enabled = false;
-				body2.GetComponent<TrailRenderer>().enabled = true;
-				body3.GetComponent<TrailRenderer>().enabled = false;
-			}
-			if(this.PlayerIndex==4){
-				body.GetComponent<TrailRenderer>().enabled = false;
-				body1.GetComponent<TrailRenderer>().enabled = false;
-				body2.GetComponent<TrailRenderer>().enabled = false;
-				body3.GetComponent<TrailRenderer>().enabled = true;
-			}
+			body.gameObject.GetComponent<Renderer> ().material.color = Color.yellow;
+			body.GetComponent<TrailRenderer>().enabled = true;
 		} else {
+			body.gameObject.GetComponent<Renderer> ().material.color = Color.white;
 			body.GetComponent<TrailRenderer>().enabled = false;
-			body1.GetComponent<TrailRenderer>().enabled = false;
-			body2.GetComponent<TrailRenderer>().enabled = false;
-			body3.GetComponent<TrailRenderer>().enabled = false;
 		}
 	}
 
@@ -315,7 +265,6 @@ public class Hero : MonoBehaviour
 	{
 
 		this.TimeUntilNextProjectile -= Time.fixedDeltaTime;
-        this.TimeUntilNextBuffer -= Time.fixedDeltaTime;
 
 		this.transform.Translate (this.velocity * Time.fixedDeltaTime);
     }
@@ -370,32 +319,33 @@ public class Hero : MonoBehaviour
             Vector2 ourVelo = this.velocity;
             Vector2 theirVelo = attackingHero.velocity;
 
-            Vector2 ourNewVelo = new Vector2(theirVelo.x - ourVelo.x, theirVelo.y - ourVelo.y);
-            Vector2 theirNewVelo = ourNewVelo * -1f;
+            Vector2 ourNewVelo = new Vector2(theirVelo.x - ourVelo.x, theirVelo.y - ourVelo.y).normalized * theirVelo.magnitude;
+            Vector2 theirNewVelo = (ourNewVelo * -1f).normalized * theirVelo.magnitude;
 
             this.velocity = ourNewVelo;
             attackingHero.velocity = theirNewVelo;
 
 
-        	Vector2 ourPos = gameObject.transform.position;
-        	Vector2 theirPos = attackingHero.gameObject.transform.position;
-        	CollisionController ourCol = gameObject.GetComponent<CollisionController>();
-        	CollisionController theirCol = attackingHero.gameObject.GetComponent<CollisionController>();
-        	float ourRad = ourCol.getRadius();
-        	float theirRad = theirCol.getRadius();
+            Vector2 ourPos = gameObject.transform.position;
+            Vector2 theirPos = attackingHero.gameObject.transform.position;
+            CollisionController ourCol = gameObject.GetComponent<CollisionController>();
+            CollisionController theirCol = attackingHero.gameObject.GetComponent<CollisionController>();
+            float ourRad = ourCol.getRadius();
+            float theirRad = theirCol.getRadius();
 
-        	float distance = (float) Math.Sqrt(Math.Pow(ourPos.x - theirPos.x, 2) + Math.Pow(ourPos.y - theirPos.y, 2));
-        	float minDistance = 1.5f * (ourRad + theirRad);
+            float distance = (float) Math.Sqrt(Math.Pow(ourPos.x - theirPos.x, 2) + Math.Pow(ourPos.y - theirPos.y, 2));
+            float minDistance = 1.5f * (ourRad + theirRad);
 
-        	if(distance < minDistance) {
-        		this.transform.Translate (this.velocity * Time.fixedDeltaTime);
-        		attackingHero.transform.Translate (attackingHero.velocity * Time.fixedDeltaTime);
-        	}
+            if(distance < minDistance) {
+                this.transform.Translate (this.velocity * Time.fixedDeltaTime);
+                attackingHero.transform.Translate (attackingHero.velocity * Time.fixedDeltaTime);
+            }
         }
 	}
 
     public void SetPowerup (Pickup pickup)
     {
+        // Debug.Log(pickup.PickupType.ToString());
         this.powerupName = pickup.PickupType.ToString();
     }
 
