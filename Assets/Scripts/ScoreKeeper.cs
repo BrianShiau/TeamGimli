@@ -72,18 +72,8 @@ public class ScoreKeeper : MonoBehaviour
 	
 	public void ResetGame()
 	{
-		/*if (this.WinningHero != null) {
-			//this.StopHeroAboutToWinSound();
-			this.StopVictorySound ();
-			SoundFX.Instance.StartMusic ();
-			this.WinningHero = null;
-			//this.HeroAboutToWin = null;
-		
-			Hero[] heroes = FindObjectsOfType (typeof(Hero)) as Hero[];
-			foreach (Hero hero in heroes) {
-				hero.Reset ();
-			}
-		}*/
-		Application.LoadLevel (Application.loadedLevelName);
+		if (this.WinningHero != null) {
+			Application.LoadLevel (Application.loadedLevelName);
+		}
 	}
 }

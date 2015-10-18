@@ -422,8 +422,4 @@ public class Hero : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-	public void Reset(){
-
-	}
 }
