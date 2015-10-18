@@ -57,7 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickupType: 1
   secTillResetPowerup: 5
-  MassiveAccelerationValue: .600000024
+  MassiveAccelerationValue: 1
   MassiveDecelerationValue: .200000003
   AlteredThresholdModifier: .5
   ExpirationTime: 0
@@ -118,7 +118,7 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: MassiveAccelerationValue
-      value: .600000024
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
