@@ -101,8 +101,7 @@ public class HeroController : MonoBehaviour
 		get
 		{
 			InputDevice inputDevice = this.InputDevice;
-			return (inputDevice != null) ? inputDevice.Action1.WasReleased : (Input.GetButtonUp ("Fire1"));
+			return (inputDevice != null) ? inputDevice.Action4.WasReleased : (Input.GetButtonUp ("Fire3"));
 		}
 	}
-
 }

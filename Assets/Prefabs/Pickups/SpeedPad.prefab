@@ -13,7 +13,7 @@ GameObject:
   - 58: {fileID: 5844204}
   - 114: {fileID: 11486018}
   m_Layer: 0
-  m_Name: MassiveAcceleration
+  m_Name: SpeedPad
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 186600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.8180008, y: -4.39379978, z: 0}
-  m_LocalScale: {x: 4.58812904, y: 4.58812809, z: 4.58812809}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedc830910f364f8b9cf1ee51461ebaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickupType: 1
+  PickupType: 7
   secTillResetPowerup: 5
   MassiveAccelerationValue: .600000024
   MassiveDecelerationValue: .200000003
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 833249835
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 166cf989925d94492895498a472d6ed7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b71ffa6ad09ad4ea0a824bdfef0bccc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -109,16 +109,28 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: PickupType
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 166cf989925d94492895498a472d6ed7,
+      objectReference: {fileID: 21300000, guid: b71ffa6ad09ad4ea0a824bdfef0bccc1,
         type: 3}
     - target: {fileID: 0}
       propertyPath: MassiveAccelerationValue
       value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

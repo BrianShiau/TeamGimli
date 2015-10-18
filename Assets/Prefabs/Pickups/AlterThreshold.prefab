@@ -1,42 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &186600
+--- !u!1 &104456
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 461480}
-  - 114: {fileID: 11427592}
-  - 212: {fileID: 21292756}
-  - 58: {fileID: 5844204}
-  - 114: {fileID: 11486018}
+  - 4: {fileID: 498212}
+  - 114: {fileID: 11446096}
+  - 212: {fileID: 21211838}
+  - 58: {fileID: 5854032}
+  - 114: {fileID: 11406698}
   m_Layer: 0
-  m_Name: MassiveAcceleration
+  m_Name: AlterThreshold
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &461480
+--- !u!4 &498212
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186600}
+  m_GameObject: {fileID: 104456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.8180008, y: -4.39379978, z: 0}
+  m_LocalPosition: {x: -18.2592754, y: -17.5979156, z: 0}
   m_LocalScale: {x: 4.58812904, y: 4.58812809, z: 4.58812809}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!58 &5844204
+--- !u!58 &5854032
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186600}
+  m_GameObject: {fileID: 104456}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -44,42 +44,42 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .305000007
---- !u!114 &11427592
+--- !u!114 &11406698
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aedc830910f364f8b9cf1ee51461ebaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PickupType: 1
-  secTillResetPowerup: 5
-  MassiveAccelerationValue: .600000024
-  MassiveDecelerationValue: .200000003
-  AlteredThresholdModifier: .5
-  ExpirationTime: 0
-  StartBlinkTime: 0
---- !u!114 &11486018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186600}
+  m_GameObject: {fileID: 104456}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b623c5ea31d141d4bb7ec94f7fc243a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wallDampeningFactor: .5
---- !u!212 &21292756
+--- !u!114 &11446096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aedc830910f364f8b9cf1ee51461ebaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickupType: 6
+  secTillResetPowerup: 5
+  MassiveAccelerationValue: .600000024
+  MassiveDecelerationValue: .200000003
+  AlteredThresholdModifier: .5
+  ExpirationTime: 0
+  StartBlinkTime: 0
+--- !u!212 &21211838
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186600}
+  m_GameObject: {fileID: 104456}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 833249835
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 166cf989925d94492895498a472d6ed7, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 045aad31c35f84968bd9a35c8775b989, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -108,19 +108,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: PickupType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 166cf989925d94492895498a472d6ed7,
+      objectReference: {fileID: 21300002, guid: 045aad31c35f84968bd9a35c8775b989,
         type: 3}
     - target: {fileID: 0}
-      propertyPath: MassiveAccelerationValue
-      value: .600000024
+      propertyPath: PickupType
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 186600}
+  m_RootGameObject: {fileID: 104456}
   m_IsPrefabParent: 1

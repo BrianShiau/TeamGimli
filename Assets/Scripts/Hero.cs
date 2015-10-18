@@ -5,6 +5,8 @@ using Jolly;
 
 public class Hero : MonoBehaviour
 {
+    public static int CurrentWinnerIndex = -1;
+    public bool CurrentWinner = false;
     public float ScaleAdjustment;
     public int ScaleIterations;
     public Vector2 HUDPosition
@@ -38,6 +40,8 @@ public class Hero : MonoBehaviour
     public bool EnableDoubleJump;
     public bool AboveThreshold = false;
     private float Threshold = 30.0f;
+    private float DefaultThresholdModifier = 1.0f;
+    public float ThresholdModifier;
     public float ChannelTime;
     public float RespawnTime;
     public float RespawnTimeIncreasePerDeath;
@@ -91,6 +95,7 @@ public class Hero : MonoBehaviour
     private float JumpForgivenessTimeLeft;
     private GameObject MaxSizeSound;
     private int NumDeaths;
+	private float previousRotation;
 
     public Sprite[] BodySprites;
     public Sprite[] ProjectileSprites;
@@ -100,25 +105,39 @@ public class Hero : MonoBehaviour
 
     void Start ()
     {
-        this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
+    	this.ThresholdModifier = this.DefaultThresholdModifier;
+        this.scalarAccelerationModifier = this.defaultScalarAccelerationModifier;
         this.HeroController = this.GetComponent<HeroController>();
-        this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
+        this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites
+            [((this.HeroController.PlayerNumber == (CurrentWinnerIndex - 1)) ? this.BodySprites.Length - 1: this.HeroController.PlayerNumber)];
         this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
         this.ProjectileExplosionSprite = this.ProjectileExplosions[this.HeroController.PlayerNumber];
         this.RespawnTimeCalculated = this.RespawnTime;
 
         this.groundMask = LayerMask.NameToLayer ("Ground");
 		this.IsAlive = true;
-    }
-
-    private float scale
-    {
-        set
-        {
-            float minYOld = this.GetComponent<Collider2D>().bounds.min.y;
-            this.transform.localScale = new Vector3((this.FacingRight ? 1.0f : -1.0f) * value, value, 1.0f);
-            float minYNew = this.GetComponent<Collider2D>().bounds.min.y;
-            Vector3 v = this.transform.position;
+		if(this.PlayerIndex==1){
+			previousRotation = 90.0f;
+		}
+		if(this.PlayerIndex==2){
+			previousRotation = 180.0f;
+		}
+		if(this.PlayerIndex==3){
+			previousRotation = 270.0f;
+		}
+		if(this.PlayerIndex==4){
+			previousRotation = 0.0f;
+		}
+	}
+	
+	private float scale
+	{
+		set
+		{
+			float minYOld = this.GetComponent<Collider2D>().bounds.min.y;
+			this.transform.localScale = new Vector3((this.FacingRight ? 1.0f : -1.0f) * value, value, 1.0f);
+			float minYNew = this.GetComponent<Collider2D>().bounds.min.y;
+			Vector3 v = this.transform.position;
             this.transform.position = new Vector3(v.x, v.y + minYOld - minYNew, v.z);
         }
         get
@@ -196,23 +215,24 @@ public class Hero : MonoBehaviour
         }
 
         // check powerups
-        if (this.hasPowerup)
+        if (this.hasPowerup && Time.time > this.TimeTillNotPowered)
         {
-            if (this.TimeTillNotAccelerated != 0)
-            {
-                if (Time.time > this.TimeTillNotAccelerated)
-                {
-                    this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
-                    this.TimeTillNotAccelerated = 0;
-                    this.hasPowerup = false;
-                }
-            }
-            // if(!this.hasPowerup)
-            //  // Debug.Log(this.name + "'s powerup ended");
+            this.TimeTillNotPowered = 0;
+            this.hasPowerup = false;
+            
+            this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
+            this.ThresholdModifier = this.DefaultThresholdModifier;
         }
 
-        float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
-        float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
+        float newX = this.velocity.x;
+        float newY = this.velocity.y;
+        if(Time.timeScale != 0.0f)
+        {
+	        newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
+	        newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
+	        this.velocity = new Vector2 (newX, newY);
+
+        }
 
         float newRotation = 0;
         if (newY != 0) {
@@ -250,14 +270,15 @@ public class Hero : MonoBehaviour
         else{
             newRotation = newX > 0 ? 90 : 270;
             if (newX==0)
-                newRotation = 0;
+                newRotation = previousRotation;
         }
         body.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -newRotation));
+		previousRotation = newRotation;
+
         
-        this.velocity = new Vector2 (newX, newY);
 
         // Sets threshold to true if at a velocity that kills another player
-        this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
+        this.AboveThreshold = this.velocity.magnitude >= (this.Threshold * this.ThresholdModifier);
         if (this.AboveThreshold) {
             if(this.PlayerIndex==1){
                 body.GetComponent<TrailRenderer>().enabled = true;
@@ -312,7 +333,7 @@ public class Hero : MonoBehaviour
     public float FallingMargin = 0.5f;
     public float MaxNewSpeed = 50.0f;
 
-    public float TimeTillNotAccelerated = 0;
+    public float TimeTillNotPowered = 0;
 
     private Rect box;
     public Vector2 velocity = Vector2.zero;
@@ -438,6 +459,7 @@ public class Hero : MonoBehaviour
         Destroy(this.MaxSizeSound);
 
         SoundFX.Instance.OnHeroDies(this);
+        CurrentWinner = false;
 
         Destroy(gameObject);
     }

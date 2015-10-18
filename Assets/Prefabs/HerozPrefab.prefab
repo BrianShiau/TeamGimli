@@ -195,11 +195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: -2.4000001, y: 5.30000019, z: 0}
-=======
-  m_LocalPosition: {x: 12.6999998, y: 3.29999995, z: 0}
->>>>>>> c03b48b5423e302cf81f8d1f0b10db64d99a8119
+  m_LocalPosition: {x: 6.5, y: -7.80000019, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 458088}
@@ -321,7 +317,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: .100000001
+  m_Time: .125
   m_StartWidth: 1
   m_EndWidth: 1
   m_Colors:
@@ -366,7 +362,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: .100000001
+  m_Time: .125
   m_StartWidth: 1
   m_EndWidth: 1
   m_Colors:
@@ -411,7 +407,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: .100000001
+  m_Time: .125
   m_StartWidth: 1
   m_EndWidth: 1
   m_Colors:
@@ -456,7 +452,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: .100000001
+  m_Time: .125
   m_StartWidth: 1
   m_EndWidth: 1
   m_Colors:
@@ -536,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6acd4c884b7c4b5c9db3d432e5951e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentWinner: 0
   ScaleAdjustment: .899999976
   ScaleIterations: 5
   SpawnMagnitude: 20
@@ -554,6 +551,7 @@ MonoBehaviour:
   body3: {fileID: 184906}
   EnableDoubleJump: 1
   AboveThreshold: 0
+  ThresholdModifier: 0
   ChannelTime: 2.5
   RespawnTime: 1
   RespawnTimeIncreasePerDeath: 2.5
@@ -566,16 +564,13 @@ MonoBehaviour:
   powerupName: none
   ProjectileLaunchVelocity: 15
   ProjectileDelay: 1
-<<<<<<< HEAD
   BufferCooldown: .25
-=======
-  BufferCooldown: .75
->>>>>>> c03b48b5423e302cf81f8d1f0b10db64d99a8119
   BodySprites:
-  - {fileID: 21300002, guid: 70d1b359d3bff40b38695c77ce488828, type: 3}
-  - {fileID: 21300010, guid: 189c3c1b7d46745df9f16c264751f3b3, type: 3}
-  - {fileID: 21300002, guid: 0afb31d454bd94378803684ab99ba5d7, type: 3}
-  - {fileID: 21300000, guid: 1c860f0d83f2c450288bf82f0cdaf973, type: 3}
+  - {fileID: 21300000, guid: b28ec18b3807b344a9273f395eb500e9, type: 3}
+  - {fileID: 21300000, guid: c0aa30fa73f655447880a29ad43e05e3, type: 3}
+  - {fileID: 21300000, guid: 2f293828c878d5c478316a3ec2a5cec3, type: 3}
+  - {fileID: 21300000, guid: bd0afb5811f3a3743817e5db2d3c0a2c, type: 3}
+  - {fileID: 21300000, guid: c6ca0465954c11544bab4fe07885cc29, type: 3}
   ProjectileSprites:
   - {fileID: 21300000, guid: 25913286cebd94ba88c9d642fc1ba721, type: 3}
   - {fileID: 21300000, guid: 2444351bafc5d4974bf684c9139cacca, type: 3}
@@ -593,7 +588,7 @@ MonoBehaviour:
   StaticMargin: .200000003
   FallingMargin: 1.20000005
   MaxNewSpeed: 10
-  TimeTillNotAccelerated: 0
+  TimeTillNotPowered: 0
   velocity: {x: 0, y: 0}
 --- !u!212 &21202002
 SpriteRenderer:

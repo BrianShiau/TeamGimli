@@ -25,8 +25,8 @@ public class CollisionController : MonoBehaviour {
 	  }
 
 
-	  maxX = 26.0f;
-	  minX = -26.0f;
+	  maxX = 23.0f;
+	  minX = -23.0f;
 	  maxY = 12.5f;
 	  minY = -12.5f;
 	}
@@ -113,7 +113,7 @@ public class CollisionController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		/*bool debug = true;
+		bool debug = false;
 
 		if(debug){
 			if(this.type == "Player") {
@@ -125,7 +125,7 @@ public class CollisionController : MonoBehaviour {
 				Vector3 pos = gameObject.transform.position;
 				Drawing.DrawCircle(Camera.main, pos, this.radius, Color.red, 2f, Vector2.one);
 			}
-		}*/
+		}
 	}
 
 	public float getRadius() {
