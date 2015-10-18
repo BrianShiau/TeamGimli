@@ -263,7 +263,8 @@ public class Hero : MonoBehaviour
                 newRotation = previousRotation;
         }
         body.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -newRotation));
-        
+		previousRotation = newRotation;
+
         this.velocity = new Vector2 (newX, newY);
 
         // Sets threshold to true if at a velocity that kills another player
