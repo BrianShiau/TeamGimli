@@ -37,7 +37,7 @@ public class Hero : MonoBehaviour
 	public GameObject body3;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
-    private float Threshold = 300.0f;
+    private float Threshold = 30.0f;
 	public float ChannelTime;
 	public float RespawnTime;
 	public float RespawnTimeIncreasePerDeath;
