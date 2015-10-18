@@ -49,7 +49,7 @@ public class ScoreKeeper : MonoBehaviour
 	{
 		this.GameWonSound = SoundFX.Instance.OnMatchWon(hero, index);
 		SoundFX.Instance.StopMusic();
-		ChangeTime = Time.time + TimeTillChangeSprite[index];
+		ChangeTime = Time.time + TimeTillChangeSprite[index - 1];
 		Hero.CurrentWinnerIndex = index;
 	}
 	

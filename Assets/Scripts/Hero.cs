@@ -112,7 +112,7 @@ public class Hero : MonoBehaviour
         this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites
             [((this.HeroController.PlayerNumber == (CurrentWinnerIndex - 1)) ? this.BodySprites.Length - 1: this.HeroController.PlayerNumber)];
         this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
-        this.ProjectileExplosionSprite = this.ProjectileExplosions[this.HeroController.PlayerNumber];
+        this.ProjectileExplosionSprite = this.ProjectileExplosions[0];
         this.RespawnTimeCalculated = this.RespawnTime;
 
         this.groundMask = LayerMask.NameToLayer ("Ground");
@@ -388,7 +388,7 @@ public class Hero : MonoBehaviour
         // This hero is fast enough to kill the hero that ran into it
         if (this.AboveThreshold && !attackingHero.AboveThreshold)
         {
-            GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
+            GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, this.transform.rotation);
             projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
             this.velocity -= attackingHero.velocity;
             attackingHero.Die(null);
@@ -397,7 +397,7 @@ public class Hero : MonoBehaviour
         // Hero that rammed this hero is fast enough to kill
         else if (!this.AboveThreshold && attackingHero.AboveThreshold)
         {
-            GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
+            GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, this.transform.rotation);
             projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
             attackingHero.velocity -= this.velocity;
             this.Die(null);
@@ -466,7 +466,6 @@ public class Hero : MonoBehaviour
         Destroy(this.MaxSizeSound);
 
         SoundFX.Instance.OnHeroDies(this);
-        CurrentWinner = false;
 
         Destroy(gameObject);
     }
