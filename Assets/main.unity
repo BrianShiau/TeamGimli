@@ -427,10 +427,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40d5b86a845894bcdb6c3c58e4d2352d, type: 3}
   HeroHit: []
   HeroDies:
-  - {fileID: 8300000, guid: 97ad6ee9ebfa44b93899a0d97b1fc4d2, type: 3}
-  - {fileID: 8300000, guid: fc5da852b616249c99a2141ae2bd8eaa, type: 3}
-  - {fileID: 8300000, guid: 9ef5b74c921704fe2ba373c09ffc297c, type: 3}
-  - {fileID: 8300000, guid: 7012d735c0c864a6cb31bceb6c53c5d0, type: 3}
+  - {fileID: 8300000, guid: 748e7f2ee4a4f45239345a8a762a40d2, type: 3}
   Respawn:
   - {fileID: 8300000, guid: 58053dce6f44c42a69714dba9d9ae3e0, type: 3}
   StompStart:
@@ -995,7 +992,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cd469c9a32e9545aaba4400034ff354c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 50a2731a78eb14d17a7e9196f5ec9b73, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

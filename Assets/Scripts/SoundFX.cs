@@ -86,7 +86,7 @@ public class SoundFX : MonoBehaviour
 	
 	public GameObject OnHeroDies(Hero hero)
 	{
-		return AudioSourceExt.PlayRandomClipAtPoint (this.HeroDies, hero.xyz());
+		return AudioSourceExt.PlayRandomClipAtPoint (this.HeroDies, hero.xyz(),  0.2f);
 	}
 	
 	public GameObject OnHeroRespawn(Hero hero)
