@@ -5,6 +5,7 @@ using Jolly;
 
 public class Hero : MonoBehaviour
 {
+    public static bool CurrentWinner = true;
     public float ScaleAdjustment;
     public int ScaleIterations;
     public Vector2 HUDPosition
@@ -106,7 +107,7 @@ public class Hero : MonoBehaviour
     	this.ThresholdModifier = this.DefaultThresholdModifier;
         this.scalarAccelerationModifier = this.defaultScalarAccelerationModifier;
         this.HeroController = this.GetComponent<HeroController>();
-        this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
+        this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[((CurrentWinner) ? this.BodySprites.Length - 1: this.HeroController.PlayerNumber)];
         this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
         this.ProjectileExplosionSprite = this.ProjectileExplosions[this.HeroController.PlayerNumber];
         this.RespawnTimeCalculated = this.RespawnTime;
@@ -449,6 +450,7 @@ public class Hero : MonoBehaviour
         Destroy(this.MaxSizeSound);
 
         SoundFX.Instance.OnHeroDies(this);
+        CurrentWinner = false;
 
         Destroy(gameObject);
     }
