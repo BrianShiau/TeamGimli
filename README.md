@@ -1,6 +1,5 @@
-# teamjollygame2
-Team Jolly's Game Jam game from the April 2015 game jam. This game was built over the course of a weekend.
+# Team Gimli entry to Jolly Game Jam 3
 
-An early video is here:  https://www.youtube.com/watch?v=11ykPbPquKA
+2D top down jousting game based off of Team Jolly's Game Jam game from the April 2015 game jam. Intended for 2-4 players using regular game controllers. This game was built over the course of a weekend.
 
-http://jolly.company
+Our thanks to http://jolly.company
