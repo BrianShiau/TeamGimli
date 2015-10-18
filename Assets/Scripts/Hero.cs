@@ -256,8 +256,10 @@ public class Hero : MonoBehaviour
         this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
 		if (this.AboveThreshold) {
 			body.gameObject.GetComponent<Renderer> ().material.color = Color.yellow;
+			body.GetComponent<TrailRenderer>().enabled = true;
 		} else {
 			body.gameObject.GetComponent<Renderer> ().material.color = Color.white;
+			body.GetComponent<TrailRenderer>().enabled = false;
 		}
 	}
 
