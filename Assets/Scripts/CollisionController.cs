@@ -86,6 +86,7 @@ public class CollisionController : MonoBehaviour {
 
 		if(thisX >= this.maxX || thisX <= this.minX)
 		{
+            
 			thisX += (thisX >= this.maxX ? -1 : 1);
 			Vector3 pos = new Vector3(thisX, thisY, 0);
 			gameObject.transform.position = pos;

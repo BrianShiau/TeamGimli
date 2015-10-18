@@ -69,6 +69,8 @@ public class Hero : MonoBehaviour
 	public float ProjectileLaunchVelocity;
 	public float ProjectileDelay;
 	private float TimeUntilNextProjectile = 0.0f;
+    public float BufferDelay = 3.0f;
+    public float TimeUntilNextBuffer = 0.0f;
 
 	private bool FacingRight = true;
 
@@ -160,9 +162,26 @@ public class Hero : MonoBehaviour
 
         }
 
+        // To avoid being dampened by wall, "jump"
         else if (this.HeroController.Jump)
         {
+            this.TimeUntilNextBuffer = this.BufferDelay;
             // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
+            Debug.Log("Activating wall buffer!!!");
+            Debug.Log("\nBuffer Cooldown: " + this.BufferDelay); 
+            ShieldBuff buffer = this.GetComponent<ShieldBuff>();
+            buffer.enabled = true;
+            /* ShieldBuff.AddOnHero(this); */
+            /* this.GetComponent<ShieldBuff>().enabled; */
+            /* this.GetComponent<ShieldBuff>().AddOnHero(this); */
+            /* if (this.GetComponent<ShieldBuff>().enabled) */
+            /* { */
+            /* 	this.GetComponent<ShieldBuff>().enabled = false; */
+            /* } */
+            /* else */
+            /* { */
+            /* 	this.Die(null); */
+            /* } */
         }
         /* else if (this.HeroController.Shooting && this.TimeUntilNextProjectile < 0.0f) */
 		/* { */
@@ -260,7 +279,7 @@ public class Hero : MonoBehaviour
 		this.velocity = new Vector2 (this.velocity.x + x_component, this.velocity.y + y_component);
 	}
 
-	void accelerateByScalar(float scalar)
+	public void accelerateByScalar(float scalar)
 	{
 		this.velocity = new Vector2 (this.velocity.x * scalar, this.velocity.y * scalar);
 	}
@@ -281,6 +300,7 @@ public class Hero : MonoBehaviour
 	{
 
 		this.TimeUntilNextProjectile -= Time.fixedDeltaTime;
+        this.TimeUntilNextBuffer -= Time.fixedDeltaTime;
 
 		this.transform.Translate (this.velocity * Time.fixedDeltaTime);
     }

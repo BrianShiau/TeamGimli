@@ -187,28 +187,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4dd1d18c8f1405fa2c3a959bc5cd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Heroes:
-  - {fileID: 1486187055}
-  - {fileID: 1889159916}
-  - {fileID: 1951212560}
-  - {fileID: 1114059465}
-  LeftEdge: {fileID: 1013075763}
-  RightEdge: {fileID: 1050842650}
-  Border: .5
+  Heroes: []
+  LeftEdge: {fileID: 0}
+  RightEdge: {fileID: 0}
+  Border: 0
 --- !u!114 &46875543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 46875536}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36dad62bbb5ac4e2ca92e068e0ce0e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftEdge: {fileID: 1013075763}
-  RightEdge: {fileID: 1050842650}
-  Border: .5
+  LeftEdge: {fileID: 0}
+  RightEdge: {fileID: 0}
+  Border: 0
 --- !u!1001 &63681251
 Prefab:
   m_ObjectHideFlags: 0
@@ -313,46 +309,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416ed1a8f64304332a649c0dbe8b2d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Jump:
-  - {fileID: 8300000, guid: b0bd48ccd15d844298fec487bda36afe, type: 3}
-  - {fileID: 8300000, guid: 6e0b0df79f63d4cea9adc344a37bdb95, type: 3}
-  DoubleJump:
-  - {fileID: 8300000, guid: 94ab3c356ecf04307815b621ed1fb13b, type: 3}
-  - {fileID: 8300000, guid: 4f58237dbdc524d6fb4d3abfd6a6feb7, type: 3}
+  Jump: []
+  DoubleJump: []
   HitHead: []
-  Land:
-  - {fileID: 8300000, guid: 58819db128f4a458c8bd32c1f14ae873, type: 3}
-  GrowChannel:
-  - {fileID: 8300000, guid: 718ad66ca1a894be0b8c674c5474d5d9, type: 3}
-  GrowComplete:
-  - {fileID: 8300000, guid: 944c5fd162f3d4dc698d4a0e3e7aa665, type: 3}
-  - {fileID: 8300000, guid: 944c5fd162f3d4dc698d4a0e3e7aa665, type: 3}
-  Fire:
-  - {fileID: 8300000, guid: c2013502d66ba4ee7b8c5ad3ff3ecad4, type: 3}
-  - {fileID: 8300000, guid: 40d5b86a845894bcdb6c3c58e4d2352d, type: 3}
+  Land: []
+  GrowChannel: []
+  GrowComplete: []
+  Fire: []
   HeroHit: []
-  HeroDies:
-  - {fileID: 8300000, guid: 97ad6ee9ebfa44b93899a0d97b1fc4d2, type: 3}
-  - {fileID: 8300000, guid: fc5da852b616249c99a2141ae2bd8eaa, type: 3}
-  - {fileID: 8300000, guid: 9ef5b74c921704fe2ba373c09ffc297c, type: 3}
-  - {fileID: 8300000, guid: 7012d735c0c864a6cb31bceb6c53c5d0, type: 3}
-  Respawn:
-  - {fileID: 8300000, guid: 58053dce6f44c42a69714dba9d9ae3e0, type: 3}
-  StompStart:
-  - {fileID: 8300000, guid: 61b6b793d2fd34430be79706a6edfbaa, type: 3}
-  StompLandStun:
-  - {fileID: 8300000, guid: 61848e69595314f8bbdeeb7bc2863776, type: 3}
-  StompLandSquish:
-  - {fileID: 8300000, guid: 62a7ecb54b4c24068bf10040b4184eeb, type: 3}
-  StompLand:
-  - {fileID: 8300000, guid: c63be38f7e00440d69c55d68aab146dc, type: 3}
+  HeroDies: []
+  Respawn: []
+  StompStart: []
+  StompLandStun: []
+  StompLandSquish: []
+  StompLand: []
   Stunned: []
-  MatchWon:
-  - {fileID: 8300000, guid: c4aa4d8663829478e9f8780805ed4afa, type: 3}
-  HeroReachedMaxSize:
-  - {fileID: 8300000, guid: cffe169441d8e4231bc0e2c7b86979ad, type: 3}
-  HeroAboutToWin:
-  - {fileID: 8300000, guid: 86f78aede8725423a9dc3f7a3f6aa804, type: 3}
+  MatchWon: []
+  HeroReachedMaxSize: []
+  HeroAboutToWin: []
 --- !u!4 &243285036
 Transform:
   m_ObjectHideFlags: 0
@@ -601,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b5e8de77c5b4597ae7fbfb49a95e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logDebugInfo: 1
+  logDebugInfo: 0
   invertYAxis: 0
   enableXInput: 0
   useFixedUpdate: 0
@@ -673,10 +647,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 46875541}
   m_RootOrder: 1
---- !u!1 &1114059465 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 188786, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-  m_PrefabInternal: {fileID: 391714277}
 --- !u!4 &1114059470 stripped
 Transform:
   m_PrefabParentObject: {fileID: 421720, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
@@ -821,6 +791,10 @@ Prefab:
       propertyPath: m_Name
       value: Hero[1]
       objectReference: {fileID: 0}
+    - target: {fileID: 11429308, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
+      propertyPath: BufferLifetime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
   m_IsPrefabParent: 0
@@ -891,15 +865,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac8eb325aad1468d98871545a49a218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToWin: 10
+  TimeToWin: 0
   WinningHero: {fileID: 0}
   HeroAboutToWin: {fileID: 0}
   HeroAboutToWinSound: {fileID: 0}
   GameWonSound: {fileID: 0}
---- !u!1 &1486187055 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 188786, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-  m_PrefabInternal: {fileID: 63681251}
 --- !u!4 &1486187056 stripped
 Transform:
   m_PrefabParentObject: {fileID: 421720, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
@@ -1015,10 +985,6 @@ Transform:
   - {fileID: 551969364}
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!1 &1889159916 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 188786, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-  m_PrefabInternal: {fileID: 1175674604}
 --- !u!4 &1889159917 stripped
 Transform:
   m_PrefabParentObject: {fileID: 421720, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
@@ -1065,10 +1031,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bdd48c8ae76c44f8a0fc814a1218a7d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1951212560 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 188786, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-  m_PrefabInternal: {fileID: 697100142}
 --- !u!4 &1951212561 stripped
 Transform:
   m_PrefabParentObject: {fileID: 421720, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}

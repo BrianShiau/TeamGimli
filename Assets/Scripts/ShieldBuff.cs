@@ -4,13 +4,26 @@ using Jolly;
 
 public class ShieldBuff : MonoBehaviour {
 
+    public float BufferCooldown = 3.0f;
+	public float BufferLifetime = 4.0f;
 	public GameObject EffectRenderer;
 	private GameObject effectInstance;
 
 	void Start ()
 	{
 		this.enabled = false;
+
 	}
+
+    void Update ()
+    {
+        this.BufferLifetime -= Time.deltaTime;
+
+        if (this.BufferLifetime < 0.0f)
+        {
+            Destroy (this.gameObject);
+        }
+    }
 
 	void OnEnable ()
 	{
