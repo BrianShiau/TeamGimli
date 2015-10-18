@@ -43,9 +43,9 @@ public class ScoreKeeper : MonoBehaviour
 		Destroy(this.HeroAboutToWinSound);
 	}
 	
-	void PlayVictorySound(Hero hero)
+	void PlayVictorySound(Hero hero, int index)
 	{
-		this.GameWonSound = SoundFX.Instance.OnMatchWon(hero);
+		this.GameWonSound = SoundFX.Instance.OnMatchWon(hero, index);
 		SoundFX.Instance.StopMusic();
 	}
 	
@@ -66,7 +66,7 @@ public class ScoreKeeper : MonoBehaviour
 		Hero hero = this.FindWinningPlayer();
 		if (hero != null) {
 			this.WinningHero = hero;
-			this.PlayVictorySound(this.WinningHero);
+			this.PlayVictorySound(this.WinningHero, this.WinningHero.PlayerIndex);
 		}
 	}
 	

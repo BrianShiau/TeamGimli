@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -157,6 +155,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -298,7 +297,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c63be38f7e00440d69c55d68aab146dc, type: 3}
   Stunned: []
   MatchWon:
-  - {fileID: 8300000, guid: c4aa4d8663829478e9f8780805ed4afa, type: 3}
+  - {fileID: 8300000, guid: 2c60eb5d13e6d47cb8b487772b77f313, type: 3}
+  MatchWon1:
+  - {fileID: 8300000, guid: b0b40a95576544a708dba01e369c484a, type: 3}
+  MatchWon2:
+  - {fileID: 8300000, guid: 3ae9806b8f8834be3ac1a2fc9330268a, type: 3}
+  MatchWon3:
+  - {fileID: 8300000, guid: 53759c0f6c2094005bbf7841e54e76d3, type: 3}
   HeroReachedMaxSize:
   - {fileID: 8300000, guid: cffe169441d8e4231bc0e2c7b86979ad, type: 3}
   HeroAboutToWin:
@@ -783,6 +788,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
