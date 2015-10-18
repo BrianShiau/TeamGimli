@@ -2,7 +2,7 @@
 using System.Collections;
 using Jolly;
 
-public class ShieldBuff : MonoBehaviour {
+public class WallBuffer: MonoBehaviour {
 
     public float Duration = 1.0f;
 	private float Lifetime = 1.0f;
@@ -39,7 +39,7 @@ public class ShieldBuff : MonoBehaviour {
 
 	public static void AddToHero (Hero hero)
 	{
-		var sb = hero.GetComponent <ShieldBuff> ();
+		var sb = hero.GetComponent <WallBuffer> ();
 		sb.enabled = true;
 	}
 }

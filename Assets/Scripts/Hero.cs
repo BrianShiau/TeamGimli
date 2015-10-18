@@ -72,7 +72,7 @@ public class Hero : MonoBehaviour
 	public float ProjectileLaunchVelocity;
 	public float ProjectileDelay;
 	private float TimeUntilNextProjectile = 0.0f;
-    public float BufferDelay = 10.0f;
+    public float BufferCooldown = 10.0f;
     private float TimeUntilNextBuffer = 0.0f;
 
 	private bool FacingRight = true;
@@ -167,12 +167,11 @@ public class Hero : MonoBehaviour
             Debug.Log("Cooldown: " + this.TimeUntilNextBuffer);
             if (this.TimeUntilNextBuffer < 0.0f)
             {
-                this.TimeUntilNextBuffer = this.BufferDelay;
+                this.TimeUntilNextBuffer = this.BufferCooldown;
                 // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
                 Debug.Log("Activating wall buffer!!!");
-                Debug.Log("\nBuffer Cooldown: " + this.TimeUntilNextBuffer); 
                 ShieldBuff buffer = this.GetComponent<ShieldBuff>();
-                ShieldBuff.AddToHero(this);
+                buffer.enabled = true;
             }
             /* buffer.OnEnable(); */
             /* ShieldBuff.AddOnHero(this); */
