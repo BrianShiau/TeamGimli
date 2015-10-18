@@ -43,6 +43,7 @@ public class Hero : MonoBehaviour
     public float RespawnTimeIncreasePerDeath;
     public float StunTime;
     public float JumpForgivenessTimeAmount;
+	public bool IsAlive = false;
     public int PlayerIndex
     {
         get
@@ -107,6 +108,7 @@ public class Hero : MonoBehaviour
         this.RespawnTimeCalculated = this.RespawnTime;
 
         this.groundMask = LayerMask.NameToLayer ("Ground");
+		this.IsAlive = true;
     }
 
     private float scale
