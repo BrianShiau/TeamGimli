@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -116,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &4885594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +132,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &4885595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +229,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -357,6 +356,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
@@ -637,7 +642,7 @@ Prefab:
     - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: BodySprites.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: 1c860f0d83f2c450288bf82f0cdaf973,
+      objectReference: {fileID: 21300000, guid: c6ca0465954c11544bab4fe07885cc29,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
@@ -720,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408de3429d755cf4da4d2b33cc116798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time_per_num: .00999999978
+  time_per_num: 1.20000005
 --- !u!212 &554176027
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -809,7 +814,7 @@ Prefab:
     - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: BodySprites.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: 1c860f0d83f2c450288bf82f0cdaf973,
+      objectReference: {fileID: 21300000, guid: c6ca0465954c11544bab4fe07885cc29,
         type: 3}
     - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: BodySprites.Array.data[0]
@@ -881,6 +886,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1045,6 +1056,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1149,7 +1161,7 @@ Prefab:
     - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: BodySprites.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: 1c860f0d83f2c450288bf82f0cdaf973,
+      objectReference: {fileID: 21300000, guid: c6ca0465954c11544bab4fe07885cc29,
         type: 3}
     - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: BodySprites.Array.data[0]
@@ -1250,6 +1262,7 @@ MonoBehaviour:
   HeroAboutToWin: {fileID: 0}
   HeroAboutToWinSound: {fileID: 0}
   GameWonSound: {fileID: 0}
+  TimeTillChangeSprite: 2
 --- !u!1 &1486187055 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 188786, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
@@ -1503,7 +1516,7 @@ Prefab:
     - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: BodySprites.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: 1c860f0d83f2c450288bf82f0cdaf973,
+      objectReference: {fileID: 21300000, guid: c6ca0465954c11544bab4fe07885cc29,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}

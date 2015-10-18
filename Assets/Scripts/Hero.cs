@@ -5,7 +5,7 @@ using Jolly;
 
 public class Hero : MonoBehaviour
 {
-    public static bool CurrentWinner = true;
+    public bool CurrentWinner = false;
     public float ScaleAdjustment;
     public int ScaleIterations;
     public Vector2 HUDPosition
