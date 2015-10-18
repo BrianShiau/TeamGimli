@@ -35,6 +35,17 @@ public class Pickup : MonoBehaviour
 		if (dt >= 0.0f) {
 			this.GetComponent<SpriteRenderer> ().enabled = (Mathf.FloorToInt (dt / 0.35f) % 2 == 0);
 		}
+		if (this.PickupType == Type.SpeedPad) {
+			if(this.transform.position.x > 1 && this.transform.position.y > 1)
+				this.transform.localRotation = Quaternion.Euler (new Vector3 (0.0f, 0.0f, 225.0f));
+			if(this.transform.position.x > 1 && this.transform.position.y <= 1)
+				this.transform.localRotation = Quaternion.Euler (new Vector3 (0.0f, 0.0f, 135.0f));
+			if(this.transform.position.x <= 1 && this.transform.position.y <= 1)
+				this.transform.localRotation = Quaternion.Euler (new Vector3 (0.0f, 0.0f, 45.0f));
+			if(this.transform.position.x <= 1 && this.transform.position.y > 1)
+				this.transform.localRotation = Quaternion.Euler (new Vector3 (0.0f, 0.0f, 315.0f));
+			
+		}
 	}
 
 	public void HandleCollision (Hero hero)
