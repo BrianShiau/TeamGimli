@@ -62,7 +62,7 @@ public class Hero : MonoBehaviour
 		AlterThreshold
 	}
 	public bool hasPowerup = false;
-    public string powerupName = "none";
+    public string powerupName = "StopGun";
 
 	private HeroController HeroController;
 
@@ -144,15 +144,33 @@ public class Hero : MonoBehaviour
 				this.Respawn ();
 			}
 		}
-        if (this.HeroController.Shooting && this.hasPowerup &&
-                this.powerupName == "MassiveAccel")
+        if (this.HeroController.Shooting && /*this.hasPowerup &&*/
+                this.powerupName == "StopGun")
         {
+			this.TimeUntilNextProjectile = this.ProjectileDelay;
+			GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity);
+			projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite;
+			projectile.GetComponent<Projectile>().OwnerHero = this;
+			projectile.transform.localScale = this.transform.localScale;
+			float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity;
+			projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f);
+			SoundFX.Instance.OnHeroFire(this);
+			Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
             Debug.Log("Shooting Stop Gun");
         }
 
         else if (this.HeroController.Shooting)
         {
             Debug.Log("You can't shoot bish!!!");
+			this.TimeUntilNextProjectile = this.ProjectileDelay;
+			GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity);
+			projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite;
+			projectile.GetComponent<Projectile>().OwnerHero = this;
+			projectile.transform.localScale = this.transform.localScale;
+			float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity;
+			projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f);
+			SoundFX.Instance.OnHeroFire(this);
+			Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
         }
         /* else if (this.HeroController.Shooting && this.TimeUntilNextProjectile < 0.0f) */
 		/* { */
