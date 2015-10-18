@@ -113,7 +113,7 @@ public class CollisionController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		bool debug = true;
+		/*bool debug = true;
 
 		if(debug){
 			if(this.type == "Player") {
@@ -125,7 +125,7 @@ public class CollisionController : MonoBehaviour {
 				Vector3 pos = gameObject.transform.position;
 				Drawing.DrawCircle(Camera.main, pos, this.radius, Color.red, 2f, Vector2.one);
 			}
-		}
+		}*/
 	}
 
 	public float getRadius() {
