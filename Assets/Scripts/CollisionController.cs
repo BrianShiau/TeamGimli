@@ -6,6 +6,7 @@ public class CollisionController : MonoBehaviour {
   private float radius=1.3f;
   private float x,y;
   private float maxX, minX, maxY, minY;
+  public float wallDampeningFactor = 0.5f;
   
   private Hero thisHero;
   private Hero otherHero;
@@ -97,6 +98,7 @@ public class CollisionController : MonoBehaviour {
 			Vector3 pos = new Vector3(thisX, thisY, 0);
 			gameObject.transform.position = pos;
 			this.thisHero.velocity = new Vector2(thisVelocity.x, -thisVelocity.y);
+            this.thisHero.accelerateByScalar(wallDampeningFactor);
 		}
 	}
 
