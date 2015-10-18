@@ -5,6 +5,7 @@ using Jolly;
 
 public class Hero : MonoBehaviour
 {
+    public static int CurrentWinnerIndex = -1;
     public bool CurrentWinner = false;
     public float ScaleAdjustment;
     public int ScaleIterations;
@@ -107,7 +108,8 @@ public class Hero : MonoBehaviour
     	this.ThresholdModifier = this.DefaultThresholdModifier;
         this.scalarAccelerationModifier = this.defaultScalarAccelerationModifier;
         this.HeroController = this.GetComponent<HeroController>();
-        this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[((CurrentWinner) ? this.BodySprites.Length - 1: this.HeroController.PlayerNumber)];
+        this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites
+            [((this.HeroController.PlayerNumber == (CurrentWinnerIndex - 1)) ? this.BodySprites.Length - 1: this.HeroController.PlayerNumber)];
         this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
         this.ProjectileExplosionSprite = this.ProjectileExplosions[this.HeroController.PlayerNumber];
         this.RespawnTimeCalculated = this.RespawnTime;

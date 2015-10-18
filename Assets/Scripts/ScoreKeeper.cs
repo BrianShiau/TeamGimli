@@ -11,7 +11,7 @@ public class ScoreKeeper : MonoBehaviour
 	public Hero HeroAboutToWin;
 	public GameObject HeroAboutToWinSound;
 	public GameObject GameWonSound;
-	public float TimeTillChangeSprite;
+	public float[] TimeTillChangeSprite;
 	private float ChangeTime;
 	
 	Hero FindWinningPlayer()
@@ -48,8 +48,9 @@ public class ScoreKeeper : MonoBehaviour
 	void PlayVictorySound(Hero hero, int index)
 	{
 		this.GameWonSound = SoundFX.Instance.OnMatchWon(hero, index);
-		ChangeTime = Time.time + TimeTillChangeSprite;
 		SoundFX.Instance.StopMusic();
+		ChangeTime = Time.time + TimeTillChangeSprite[index];
+		Hero.CurrentWinnerIndex = index;
 	}
 	
 	void StopVictorySound()
