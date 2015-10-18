@@ -32,6 +32,9 @@ public class Hero : MonoBehaviour
 	public GameObject ChannelVisual;
 	public GameObject MaxGrowthVisual;
 	public GameObject body;
+	public GameObject body1;
+	public GameObject body2;
+	public GameObject body3;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
     private float Threshold = 300.0f;
@@ -250,11 +253,35 @@ public class Hero : MonoBehaviour
         // Sets threshold to true if at a velocity that kills another player
         this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
 		if (this.AboveThreshold) {
-			body.gameObject.GetComponent<Renderer> ().material.color = Color.yellow;
-			body.GetComponent<TrailRenderer>().enabled = true;
+			if(this.PlayerIndex==1){
+				body.GetComponent<TrailRenderer>().enabled = true;
+				body1.GetComponent<TrailRenderer>().enabled = false;
+				body2.GetComponent<TrailRenderer>().enabled = false;
+				body3.GetComponent<TrailRenderer>().enabled = false;
+			}
+			if(this.PlayerIndex==2){
+				body.GetComponent<TrailRenderer>().enabled = false;
+				body1.GetComponent<TrailRenderer>().enabled = true;
+				body2.GetComponent<TrailRenderer>().enabled = false;
+				body3.GetComponent<TrailRenderer>().enabled = false;
+			}
+			if(this.PlayerIndex==3){
+				body.GetComponent<TrailRenderer>().enabled = false;
+				body1.GetComponent<TrailRenderer>().enabled = false;
+				body2.GetComponent<TrailRenderer>().enabled = true;
+				body3.GetComponent<TrailRenderer>().enabled = false;
+			}
+			if(this.PlayerIndex==4){
+				body.GetComponent<TrailRenderer>().enabled = false;
+				body1.GetComponent<TrailRenderer>().enabled = false;
+				body2.GetComponent<TrailRenderer>().enabled = false;
+				body3.GetComponent<TrailRenderer>().enabled = true;
+			}
 		} else {
-			body.gameObject.GetComponent<Renderer> ().material.color = Color.white;
 			body.GetComponent<TrailRenderer>().enabled = false;
+			body1.GetComponent<TrailRenderer>().enabled = false;
+			body2.GetComponent<TrailRenderer>().enabled = false;
+			body3.GetComponent<TrailRenderer>().enabled = false;
 		}
 	}
 
