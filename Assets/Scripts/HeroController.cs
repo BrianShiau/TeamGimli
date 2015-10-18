@@ -102,7 +102,7 @@ public class HeroController : MonoBehaviour
 		{
 			if (this.PlayerNumber == 1)
 			{
-				return Input.GetButtonUp ("Fire5");
+				return Input.GetButtonUp ("Fire3");
 			}
 			return false;
 		}
