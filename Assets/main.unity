@@ -771,10 +771,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1287912642}
     m_Modifications:
-    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-      propertyPath: BodySprites.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 421720, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 6.5
@@ -811,31 +807,6 @@ Prefab:
       propertyPath: m_Name
       value: Hero[2]
       objectReference: {fileID: 0}
-    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-      propertyPath: BodySprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: c6ca0465954c11544bab4fe07885cc29,
-        type: 3}
-    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-      propertyPath: BodySprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: b28ec18b3807b344a9273f395eb500e9,
-        type: 3}
-    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-      propertyPath: BodySprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: c0aa30fa73f655447880a29ad43e05e3,
-        type: 3}
-    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-      propertyPath: BodySprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 2f293828c878d5c478316a3ec2a5cec3,
-        type: 3}
-    - target: {fileID: 11466392, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
-      propertyPath: BodySprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: bd0afb5811f3a3743817e5db2d3c0a2c,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
   m_IsPrefabParent: 0
