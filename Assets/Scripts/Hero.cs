@@ -34,7 +34,7 @@ public class Hero : MonoBehaviour
 	public GameObject body;
 	public bool EnableDoubleJump;
     public bool AboveThreshold = false;
-    public float Threshold = 400.0f;
+    private float Threshold = 300.0f;
 	public float ChannelTime;
 	public float RespawnTime;
 	public float RespawnTimeIncreasePerDeath;
@@ -149,12 +149,8 @@ public class Hero : MonoBehaviour
 
         else if (this.HeroController.Shooting)
         {
-            // Debug.Log("You can't shoot bish!!!");
 			this.TimeUntilNextProjectile = this.ProjectileDelay;
 			GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity);
-			/* projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite; */
-			/* projectile.GetComponent<Projectile>().OwnerHero = this; */
-			/* projectile.transform.localScale = this.transform.localScale; */
 			float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity;
 			projectile.GetComponent<Projectile>().Velocity = this.velocity * this.ProjectileLaunchVelocity; 
 			SoundFX.Instance.OnHeroFire(this);
@@ -183,18 +179,6 @@ public class Hero : MonoBehaviour
             /* 	this.Die(null); */
             /* } */
         }
-        /* else if (this.HeroController.Shooting && this.TimeUntilNextProjectile < 0.0f) */
-		/* { */
-			/* this.TimeUntilNextProjectile = this.ProjectileDelay; */
-			/* GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity); */
-			/* projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite; */
-			/* projectile.GetComponent<Projectile>().OwnerHero = this; */
-			/* projectile.transform.localScale = this.transform.localScale; */
-			/* float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity; */
-			/* projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f); */
-			/* SoundFX.Instance.OnHeroFire(this); */
-			/* Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>()); */
-		/* } */
 
 		if (this.HeroController.GetResetGame)
 		{
@@ -305,23 +289,12 @@ public class Hero : MonoBehaviour
 		this.transform.Translate (this.velocity * Time.fixedDeltaTime);
     }
 
-
 	void LateUpdate ()
 	{
 	}
 
-	void Flip ()
-	{
-		//this.FacingRight = !this.FacingRight;
-		//this.scale = this.scale;
-	}
-
 	public void Hit (Hero attackingHero)
 	{
-        // Debug.Log("Hero shooting: " + attackingHero.PlayerIndex);
-        // Debug.Log("Who got shot: " + this.PlayerIndex);
-        /* attackingHero.Die(this); */
-        /* Die(this); */
 		if (this == attackingHero)
 		{
 			return;
@@ -361,18 +334,33 @@ public class Hero : MonoBehaviour
         // Neither of the colliding heroes are fast enough to kill, so they reverse their direction
         else
         {
-            this.accelerateByScalar(-1.0f);
-            attackingHero.accelerateByScalar(-1.0f);
-        }
+            // this.accelerateByScalar(-1.0f);
+            // attackingHero.accelerateByScalar(-1.0f);
+            Vector2 ourVelo = this.velocity;
+            Vector2 theirVelo = attackingHero.velocity;
 
-		/* if (this.GetComponent<ShieldBuff>().enabled) */
-		/* { */
-		/* 	this.GetComponent<ShieldBuff>().enabled = false; */
-		/* } */
-		/* else */
-		/* { */
-		/* 	this.Die(attackingHero); */
-		/* } */
+            Vector2 ourNewVelo = new Vector2(theirVelo.x - ourVelo.x, theirVelo.y - ourVelo.y);
+            Vector2 theirNewVelo = ourNewVelo * -1f;
+
+            this.velocity = ourNewVelo;
+            attackingHero.velocity = theirNewVelo;
+
+
+        	Vector2 ourPos = gameObject.transform.position;
+        	Vector2 theirPos = attackingHero.gameObject.transform.position;
+        	CollisionController ourCol = gameObject.GetComponent<CollisionController>();
+        	CollisionController theirCol = attackingHero.gameObject.GetComponent<CollisionController>();
+        	float ourRad = ourCol.getRadius();
+        	float theirRad = theirCol.getRadius();
+
+        	float distance = (float) Math.Sqrt(Math.Pow(ourPos.x - theirPos.x, 2) + Math.Pow(ourPos.y - theirPos.y, 2));
+        	float minDistance = 1.5f * (ourRad + theirRad);
+
+        	if(distance < minDistance) {
+        		this.transform.Translate (this.velocity * Time.fixedDeltaTime);
+        		attackingHero.transform.Translate (attackingHero.velocity * Time.fixedDeltaTime);
+        	}
+        }
 	}
 
     public void SetPowerup (Pickup pickup)
@@ -396,15 +384,5 @@ public class Hero : MonoBehaviour
 		SoundFX.Instance.OnHeroDies(this);
 
 		Destroy(gameObject);
-	}
-
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		this.gameObject.layer = LayerMask.NameToLayer ("IgnorePlatforms");
-	}
-
-	void OnTriggerExit2D(Collider2D other)
-	{
-		this.gameObject.layer = LayerMask.NameToLayer ("Default");
 	}
 }

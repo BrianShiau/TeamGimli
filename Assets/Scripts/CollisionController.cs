@@ -45,33 +45,17 @@ public class CollisionController : MonoBehaviour {
 	}
   	
  	bool collision(GameObject obj) {
-        float length = thisHero.velocity.magnitude;
-        float distanceFactor = 1/(1.5f * length);
-
-		Vector2 velocity = thisHero.velocity * distanceFactor; //this collision controller
         float startX = gameObject.transform.position.x;
         float startY = gameObject.transform.position.y;
-        float endX = startX + velocity.x;
-        float endY = startY + velocity.y;
-
-        Vector2 direction = velocity.normalized;
 
         otherHero = obj.GetComponent<Hero>(); //the other collision controller
         float centerX = obj.transform.position.x;
         float centerY = obj.transform.position.y;
 
-        float t = (direction.x * (centerX - startX)) + (direction.y * (centerY - startY));
+        CollisionController theirCol = obj.GetComponent<CollisionController>();
+    	float theirRad = theirCol.getRadius();
 
-        Vector2 closest = new Vector2(t * (direction.x + startX), t * (direction.y + startY));
-
-        double distance = Math.Sqrt(Math.Pow(closest.x - centerX, 2) + Math.Pow(closest.y - centerY, 2));
-
-        // if(distance <= radius) {
-        // 	Debug.Log("Line-Circle Test Passed");
-        // 	return true;
-        // }
-
-        if(Math.Pow(centerX - startX, 2) + Math.Pow(centerY - startY, 2) <= Math.Pow(2 * radius, 2)) {
+        if(Math.Pow(centerX - startX, 2) + Math.Pow(centerY - startY, 2) <= Math.Pow(radius + theirRad , 2)) {
         	Debug.Log("Circle-Circle Test Passed");
         	return true;
         }
@@ -112,6 +96,10 @@ public class CollisionController : MonoBehaviour {
 			Drawing.DrawLine (Camera.main, pos, new Vector3(pos.x + velocity.x, pos.y + velocity.y, 0), Color.red, 2f);
 			Drawing.DrawCircle(Camera.main, pos, radius, Color.red, 2f, Vector2.one);
 		}
+	}
+
+	public float getRadius() {
+		return this.radius;
 	}
 
 }
