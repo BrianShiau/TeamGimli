@@ -25,8 +25,8 @@ public class CollisionController : MonoBehaviour {
 	  }
 
 
-	  maxX = 24.0f;
-	  minX = -24.0f;
+	  maxX = 26.0f;
+	  minX = -26.0f;
 	  maxY = 12.5f;
 	  minY = -12.5f;
 	}

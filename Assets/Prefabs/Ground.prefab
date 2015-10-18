@@ -345,10 +345,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 462960}
   - 212: {fileID: 21266850}
-  - 61: {fileID: 6112160}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1168,8 +1167,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.51000023, y: -14, z: 0}
-  m_LocalScale: {x: 2, y: 1.5, z: 1}
+  m_LocalPosition: {x: -5, y: -13.8999996, z: 0}
+  m_LocalScale: {x: 1.25, y: 1, z: 1}
   m_Children:
   - {fileID: 435518}
   - {fileID: 433974}
@@ -1450,19 +1449,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 462960}
   m_RootOrder: 9
---- !u!61 &6112160
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142560}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 4.49181223, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 33.1981773, y: .699999988}
 --- !u!212 &21200484
 SpriteRenderer:
   m_ObjectHideFlags: 1

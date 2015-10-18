@@ -195,7 +195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.2999992, y: -3.9000001, z: 0}
+  m_LocalPosition: {x: 12.6999998, y: 3.29999995, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 458088}
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2178994888d9e4c2bb1e924c526cff21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: .5
+  Duration: .150000006
   EffectRenderer: {fileID: 193132}
 --- !u!114 &11466392
 MonoBehaviour:
@@ -562,7 +562,7 @@ MonoBehaviour:
   powerupName: none
   ProjectileLaunchVelocity: 15
   ProjectileDelay: 1
-  BufferCooldown: 1.5
+  BufferCooldown: .75
   BodySprites:
   - {fileID: 21300002, guid: 70d1b359d3bff40b38695c77ce488828, type: 3}
   - {fileID: 21300010, guid: 189c3c1b7d46745df9f16c264751f3b3, type: 3}
