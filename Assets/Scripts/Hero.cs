@@ -204,10 +204,6 @@ public class Hero : MonoBehaviour
             /*  this.Die(null); */
             /* } */
         }
-        if (this.HeroController.GetButton)
-        {
-            // nothing
-        }
 
         if (this.HeroController.GetResetGame)
         {
