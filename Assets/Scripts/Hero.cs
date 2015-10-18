@@ -38,6 +38,8 @@ public class Hero : MonoBehaviour
     public bool EnableDoubleJump;
     public bool AboveThreshold = false;
     private float Threshold = 30.0f;
+    private float DefaultThresholdModifier = 1.0f;
+    public float ThresholdModifier;
     public float ChannelTime;
     public float RespawnTime;
     public float RespawnTimeIncreasePerDeath;
@@ -100,7 +102,8 @@ public class Hero : MonoBehaviour
 
     void Start ()
     {
-        this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
+    	this.ThresholdModifier = this.DefaultThresholdModifier;
+        this.scalarAccelerationModifier = this.defaultScalarAccelerationModifier;
         this.HeroController = this.GetComponent<HeroController>();
         this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
         this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
@@ -196,19 +199,13 @@ public class Hero : MonoBehaviour
         }
 
         // check powerups
-        if (this.hasPowerup)
+        if (this.hasPowerup && Time.time > this.TimeTillNotPowered)
         {
-            if (this.TimeTillNotAccelerated != 0)
-            {
-                if (Time.time > this.TimeTillNotAccelerated)
-                {
-                    this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
-                    this.TimeTillNotAccelerated = 0;
-                    this.hasPowerup = false;
-                }
-            }
-            // if(!this.hasPowerup)
-            //  // Debug.Log(this.name + "'s powerup ended");
+            this.TimeTillNotPowered = 0;
+            this.hasPowerup = false;
+            
+            this.scalarAccelerationModifier = defaultScalarAccelerationModifier;
+            this.ThresholdModifier = this.DefaultThresholdModifier;
         }
 
         float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
@@ -257,7 +254,7 @@ public class Hero : MonoBehaviour
         this.velocity = new Vector2 (newX, newY);
 
         // Sets threshold to true if at a velocity that kills another player
-        this.AboveThreshold = this.velocity.magnitude >= this.Threshold;
+        this.AboveThreshold = this.velocity.magnitude >= (this.Threshold * this.ThresholdModifier);
         if (this.AboveThreshold) {
             if(this.PlayerIndex==1){
                 body.GetComponent<TrailRenderer>().enabled = true;
@@ -312,7 +309,7 @@ public class Hero : MonoBehaviour
     public float FallingMargin = 0.5f;
     public float MaxNewSpeed = 50.0f;
 
-    public float TimeTillNotAccelerated = 0;
+    public float TimeTillNotPowered = 0;
 
     private Rect box;
     public Vector2 velocity = Vector2.zero;

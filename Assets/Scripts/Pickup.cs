@@ -17,9 +17,10 @@ public class Pickup : MonoBehaviour
 
 	public Type PickupType;
 
-	public int secTillResetAccPowerup = 5; // in seconds
+	public int secTillResetPowerup = 5; // in seconds
 	public float MassiveAccelerationValue = 0.6f;
 	public float MassiveDecelerationValue = 0.02f;
+	public float AlteredThresholdModifier = 0.5f;
 
 	public float ExpirationTime;
 	public float StartBlinkTime;
@@ -64,13 +65,13 @@ public class Pickup : MonoBehaviour
 			}
 			case Type.MassiveAccel:
 			{
-				hero.TimeTillNotAccelerated = Time.time + secTillResetAccPowerup;
+				hero.TimeTillNotPowered = Time.time + secTillResetPowerup;
 				hero.scalarAccelerationModifier = MassiveAccelerationValue;
 				break;
 			}
 			case Type.MassiveDecel:
 			{
-				hero.TimeTillNotAccelerated = Time.time + secTillResetAccPowerup;
+				hero.TimeTillNotPowered = Time.time + secTillResetPowerup;
 				hero.scalarAccelerationModifier = MassiveDecelerationValue;
 				break;
 			} 
@@ -88,6 +89,8 @@ public class Pickup : MonoBehaviour
 			} 
 			case Type.AlterThreshold:
 			{
+				hero.TimeTillNotPowered = Time.time + secTillResetPowerup;
+				hero.ThresholdModifier = this.AlteredThresholdModifier;
 				break;
 			} 
 		}
