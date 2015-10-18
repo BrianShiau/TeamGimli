@@ -82,8 +82,6 @@ public class Hero : MonoBehaviour
 	private GameObject StunVisualInstance;
 	private bool CanDoubleJump;
 	private bool GroundedLastFrame;
-	private float StartScale;
-	private float StartWidth;
 	private float JumpForgivenessTimeLeft;
 	private GameObject MaxSizeSound;
 	private int NumDeaths;
@@ -101,8 +99,6 @@ public class Hero : MonoBehaviour
 		this.GetComponentInChildren<SpriteRenderer>().sprite = this.BodySprites[this.HeroController.PlayerNumber];
 		this.ProjectileSprite = this.ProjectileSprites[this.HeroController.PlayerNumber];
 		this.ProjectileExplosionSprite = this.ProjectileExplosions[this.HeroController.PlayerNumber];
-		this.StartScale = this.scale;
-		this.StartWidth = this.GetComponent<Collider2D>().bounds.size.x;
 		this.RespawnTimeCalculated = this.RespawnTime;
 
 		this.groundMask = LayerMask.NameToLayer ("Ground");
@@ -134,16 +130,6 @@ public class Hero : MonoBehaviour
 
 	void Update ()
 	{
-		if (this.RespawnTimeLeft > 0.0f)
-		{
-			this.transform.position = new Vector3(0.0f, -20.0f, 0.0f);
-
-			this.RespawnTimeLeft -= Time.deltaTime;
-			if (this.RespawnTimeLeft < 0.0)
-			{
-				this.Respawn ();
-			}
-		}
         if (this.HeroController.Shooting && /*this.hasPowerup &&*/
                 this.powerupName == "StopGun")
         {
@@ -156,12 +142,12 @@ public class Hero : MonoBehaviour
 			projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f);
 			SoundFX.Instance.OnHeroFire(this);
 			Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
-            Debug.Log("Shooting Stop Gun");
+            // Debug.Log("Shooting Stop Gun");
         }
 
         else if (this.HeroController.Shooting)
         {
-            Debug.Log("You can't shoot bish!!!");
+            // Debug.Log("You can't shoot bish!!!");
 			this.TimeUntilNextProjectile = this.ProjectileDelay;
 			GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity);
 			projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite;
@@ -203,8 +189,8 @@ public class Hero : MonoBehaviour
 					this.hasPowerup = false;
 				}
 			}
-			if(!this.hasPowerup)
-				Debug.Log(this.name + "'s powerup ended");
+			// if(!this.hasPowerup)
+			// 	// Debug.Log(this.name + "'s powerup ended");
 		}
 
 		float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
@@ -287,41 +273,6 @@ public class Hero : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		var bounds = this.GetComponent<Collider2D>().bounds;
-		this.box = Rect.MinMaxRect (bounds.min.x, bounds.min.y, bounds.max.x, bounds.max.y);
-
-		bool hitSomething = false;
-		RaycastHit2D raycastHit;
-		Vector3 startPoint = new Vector3(this.box.xMin + this.StaticMargin, this.box.yMin + this.StaticMargin, this.transform.position.z);
-		Vector3 endPoint   = new Vector3(this.box.xMax - this.StaticMargin, startPoint.y, startPoint.z);
-
-        float distance = this.StaticMargin;
-		int verticalRays = Mathf.Max (3, Mathf.CeilToInt ((endPoint.x - startPoint.x) / this.StartWidth));
-
-		for (int i = 0; i < verticalRays; ++i)
-		{
-			Vector2 origin = Vector2.Lerp (startPoint, endPoint, (float)i / (float)(verticalRays - 1));
-
-			for (int mask = 0; mask < 2; ++mask)
-			{
-				if (mask == 0)
-				{
-					int oldLayer = this.gameObject.layer;
-					this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-					raycastHit = Physics2D.Linecast(origin, origin - new Vector2(0.0f, distance), (1<< LayerMask.NameToLayer("Default")));
-					this.gameObject.layer = oldLayer;
-				}
-				else
-				{
-					raycastHit = Physics2D.Linecast(origin, origin - new Vector2(0.0f, distance), (1 << this.groundMask));
-				}
-			}
-		}
-
-		if ((this.velocity.x > 0 && !this.FacingRight) || (this.velocity.x < 0 && this.FacingRight))
-		{
-			this.Flip();
-		}
 
 		this.TimeUntilNextProjectile -= Time.fixedDeltaTime;
 
@@ -339,18 +290,13 @@ public class Hero : MonoBehaviour
 		//this.scale = this.scale;
 	}
 
-	public bool IsAlive()
-	{
-		return (this.RespawnTimeLeft <= 0.0f);
-	}
-
 	public void Hit (Hero attackingHero)
 	{
-        Debug.Log("Hero shooting: " + attackingHero.PlayerIndex);
-        Debug.Log("Who got shot: " + this.PlayerIndex);
+        // Debug.Log("Hero shooting: " + attackingHero.PlayerIndex);
+        // Debug.Log("Who got shot: " + this.PlayerIndex);
         /* attackingHero.Die(this); */
         /* Die(this); */
-		if (this == attackingHero || !this.IsAlive())
+		if (this == attackingHero)
 		{
 			return;
 		}
@@ -388,9 +334,6 @@ public class Hero : MonoBehaviour
             this.accelerateByScalar(-1.0f);
             attackingHero.accelerateByScalar(-1.0f);
         }
-		/* GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity); */
-		/* projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite; */
-		/* projectileExplosion.transform.localScale *= attackingHero.scale / attackingHero.StartScale; */
 
 		/* if (this.GetComponent<ShieldBuff>().enabled) */
 		/* { */
@@ -404,7 +347,7 @@ public class Hero : MonoBehaviour
 
     public void SetPowerup (Pickup pickup)
     {
-        Debug.Log(pickup.PickupType.ToString());
+        // Debug.Log(pickup.PickupType.ToString());
         this.powerupName = pickup.PickupType.ToString();
     }
 
@@ -417,38 +360,13 @@ public class Hero : MonoBehaviour
 
 	void Die(Hero attackingHero)
 	{
-		if (!this.IsAlive())
-		{
-			return;
-		}
-
 		AudioSourceExt.StopClipOnObject(this.MaxSizeSound);
 		Destroy(this.MaxSizeSound);
 
 		SoundFX.Instance.OnHeroDies(this);
-		this.RespawnTimeLeft = this.RespawnTimeCalculated;
-		this.RespawnTimeCalculated += this.RespawnTimeIncreasePerDeath;
-		this.NumDeaths++;
+
+		Destroy(gameObject);
 	}
-
-	public void Reset()
-	{
-		this.Die(null);
-		this.Respawn();
-		this.transform.localPosition = Vector3.zero;
-		this.RespawnTimeCalculated = this.RespawnTime;
-		this.NumDeaths = 0;
-    }
-
-	void Respawn()
-	{
-		this.transform.position = new Vector3(0,0,0);
-
-		this.velocity = new Vector2(0.0f, 1.0f) * this.SpawnMagnitude;
-
-		SoundFX.Instance.OnHeroRespawn(this);
-		this.RespawnTimeLeft = -1.0f;
-    }
 
 	void OnTriggerEnter2D(Collider2D other)
 	{

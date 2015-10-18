@@ -56,9 +56,5 @@ public class ScoreKeeper : MonoBehaviour
 		this.HeroAboutToWin = null;
 
 		Hero[] heroes = FindObjectsOfType(typeof(Hero)) as Hero[];
-		foreach (Hero hero in heroes)
-		{
-			hero.Reset();
-		}
 	}
 }

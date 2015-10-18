@@ -33,7 +33,9 @@ public class CollisionController : MonoBehaviour {
 	      {
 	        if(collision(obj)) {
             // These objects collided
+	        	Debug.Log("Us: " + this.gameObject.name);
                 Hero otherHero = obj.GetComponent<Hero>();
+	        	Debug.Log("Them: " + otherHero.gameObject.name);
                 thisHero.Hit(otherHero);
 	        }	        
 	      }
@@ -63,10 +65,10 @@ public class CollisionController : MonoBehaviour {
 
         double distance = Math.Sqrt(Math.Pow(closest.x - centerX, 2) + Math.Pow(closest.y - centerY, 2));
 
-        if(distance <= radius) {
-        	Debug.Log("Line-Circle Test Passed");
-        	return true;
-        }
+        // if(distance <= radius) {
+        // 	Debug.Log("Line-Circle Test Passed");
+        // 	return true;
+        // }
 
         if(Math.Pow(centerX - startX, 2) + Math.Pow(centerY - startY, 2) <= Math.Pow(2 * radius, 2)) {
         	Debug.Log("Circle-Circle Test Passed");
