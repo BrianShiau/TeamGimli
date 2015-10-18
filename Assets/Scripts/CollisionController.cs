@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 public class CollisionController : MonoBehaviour {
-  private float radius=1.6f;
+  private float radius=1.3f;
   private float x,y;
   private float maxX, minX, maxY, minY;
   
