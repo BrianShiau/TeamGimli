@@ -224,8 +224,15 @@ public class Hero : MonoBehaviour
             this.ThresholdModifier = this.DefaultThresholdModifier;
         }
 
-        float newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
-        float newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
+        float newX = this.velocity.x;
+        float newY = this.velocity.y;
+        if(Time.timeScale != 0.0f)
+        {
+	        newX = this.velocity.x + (this.HeroController.HorizontalMovementAxis * this.scalarAccelerationModifier);
+	        newY = this.velocity.y + (this.HeroController.VerticalMovementAxis * this.scalarAccelerationModifier);
+	        this.velocity = new Vector2 (newX, newY);
+
+        }
 
         float newRotation = 0;
         if (newY != 0) {
@@ -268,7 +275,7 @@ public class Hero : MonoBehaviour
         body.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -newRotation));
 		previousRotation = newRotation;
 
-        this.velocity = new Vector2 (newX, newY);
+        
 
         // Sets threshold to true if at a velocity that kills another player
         this.AboveThreshold = this.velocity.magnitude >= (this.Threshold * this.ThresholdModifier);
