@@ -39,9 +39,8 @@ public class Pickup : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter2D (Collider2D other)
+	public void HandleCollision (Hero hero)
 	{
-		var hero = other.gameObject.GetComponent<Hero>();
 		if (hero == null)
 			return;
 		else if (hero.hasPowerup)

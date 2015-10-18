@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11427592}
   - 212: {fileID: 21292756}
   - 58: {fileID: 5844204}
+  - 114: {fileID: 11491122}
   m_Layer: 0
   m_Name: MassiveDeceleration
   m_TagString: Pickup
@@ -55,10 +56,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickupType: 2
+  secTillResetAccPowerup: 5
   MassiveAccelerationValue: .600000024
   MassiveDecelerationValue: .200000003
   ExpirationTime: 0
   StartBlinkTime: 0
+--- !u!114 &11491122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b623c5ea31d141d4bb7ec94f7fc243a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallDampeningFactor: .5
 --- !u!212 &21292756
 SpriteRenderer:
   m_ObjectHideFlags: 1
