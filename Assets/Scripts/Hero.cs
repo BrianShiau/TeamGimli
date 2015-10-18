@@ -260,7 +260,7 @@ public class Hero : MonoBehaviour
 		this.velocity = new Vector2 (this.velocity.x + x_component, this.velocity.y + y_component);
 	}
 
-	void accelerateByScalar(float scalar)
+	public void accelerateByScalar(float scalar)
 	{
 		this.velocity = new Vector2 (this.velocity.x * scalar, this.velocity.y * scalar);
 	}

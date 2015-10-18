@@ -7,7 +7,7 @@ public class StartOverlay : MonoBehaviour {
     private float x_displacement = (-1) * (Screen.width/3.5f);
     private float x_increment = Screen.width/4;
     private float y_displacement = (-1) * (Screen.height/2);
-    private public int start_num = 3;
+    private int start_num = 3;
     public float time_per_num = 1.2f;
     private int cur_num;
     private float endTime;
