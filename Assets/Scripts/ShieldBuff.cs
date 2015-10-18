@@ -5,7 +5,7 @@ using Jolly;
 public class ShieldBuff : MonoBehaviour {
 
     public float BufferCooldown = 3.0f;
-	public float BufferLifetime = 4.0f;
+	public float BufferLifetime = 1.0f;
 	public GameObject EffectRenderer;
 	private GameObject effectInstance;
 
@@ -22,9 +22,8 @@ public class ShieldBuff : MonoBehaviour {
         if (this.BufferLifetime < 0.0f)
         {
             Debug.Log("KILLING: "+this);
-            /* this.OnDisable(); */
             this.enabled = false;
-            /* Destroy (this); */
+            this.BufferLifetime = this.BufferCooldown;
         }
     }
 

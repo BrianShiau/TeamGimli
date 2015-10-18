@@ -72,8 +72,8 @@ public class Hero : MonoBehaviour
 	public float ProjectileLaunchVelocity;
 	public float ProjectileDelay;
 	private float TimeUntilNextProjectile = 0.0f;
-    public float BufferDelay = 3.0f;
-    public float TimeUntilNextBuffer = 3.0f;
+    public float BufferDelay = 10.0f;
+    private float TimeUntilNextBuffer = 0.0f;
 
 	private bool FacingRight = true;
 
@@ -162,14 +162,18 @@ public class Hero : MonoBehaviour
         }
 
         // To avoid being dampened by wall, "jump"
-        else if (this.HeroController.Jump && this.TimeUntilNextBuffer < 0.0f)
+        else if (this.HeroController.Jump /*&& this.TimeUntilNextBuffer < 0.0f*/)
         {
-            this.TimeUntilNextBuffer = this.BufferDelay;
-            // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
-            Debug.Log("Activating wall buffer!!!");
-            Debug.Log("\nBuffer Cooldown: " + this.TimeUntilNextBuffer); 
-            ShieldBuff buffer = this.GetComponent<ShieldBuff>();
-            ShieldBuff.AddToHero(this);
+            Debug.Log("Cooldown: " + this.TimeUntilNextBuffer);
+            if (this.TimeUntilNextBuffer < 0.0f)
+            {
+                this.TimeUntilNextBuffer = this.BufferDelay;
+                // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
+                Debug.Log("Activating wall buffer!!!");
+                Debug.Log("\nBuffer Cooldown: " + this.TimeUntilNextBuffer); 
+                ShieldBuff buffer = this.GetComponent<ShieldBuff>();
+                ShieldBuff.AddToHero(this);
+            }
             /* buffer.OnEnable(); */
             /* ShieldBuff.AddOnHero(this); */
             /* this.GetComponent<ShieldBuff>().enabled; */

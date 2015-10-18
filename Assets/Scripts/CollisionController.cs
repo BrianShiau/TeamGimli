@@ -68,6 +68,7 @@ public class CollisionController : MonoBehaviour {
 	    float thisY = gameObject.transform.position.y;
 	    Vector2 thisVelocity = thisHero.velocity;
 
+        // Do not dampen if buffer active
 		if(thisX >= this.maxX || thisX <= this.minX)
 		{
             
@@ -75,6 +76,10 @@ public class CollisionController : MonoBehaviour {
 			Vector3 pos = new Vector3(thisX, thisY, 0);
 			gameObject.transform.position = pos;
 			this.thisHero.velocity = new Vector2(-thisVelocity.x, thisVelocity.y);
+            if (!thisHero.GetComponent<ShieldBuff>().enabled)
+            {
+                this.thisHero.accelerateByScalar(wallDampeningFactor);
+            }
 		}
 
 		if(thisY >= this.maxY || thisY <= this.minY)
@@ -83,7 +88,10 @@ public class CollisionController : MonoBehaviour {
 			Vector3 pos = new Vector3(thisX, thisY, 0);
 			gameObject.transform.position = pos;
 			this.thisHero.velocity = new Vector2(thisVelocity.x, -thisVelocity.y);
-            this.thisHero.accelerateByScalar(wallDampeningFactor);
+            if (!thisHero.GetComponent<ShieldBuff>().enabled)
+            {
+                this.thisHero.accelerateByScalar(wallDampeningFactor);
+            }
 		}
 	}
 
