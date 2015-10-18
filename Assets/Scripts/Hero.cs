@@ -331,13 +331,32 @@ public class Hero : MonoBehaviour
     {
     }
 
-    public void Hit (Hero attackingHero)
+    public void Hit (GameObject obj)
     {
-        if (this == attackingHero)
-        {
-            return;
-        }
+    	if(obj.tag == "Player") {
+    		Hero otherHero = obj.GetComponent<Hero>();
+    		CollidePlayer(otherHero);
+    	} else if (obj.tag == "Pickup") {
+    		CollidePickup(obj);
+    	} else if (obj.tag == "Wall") {
+    		CollideWall(obj);
+    	}
+        
+    }
 
+    private void CollidePickup(GameObject obj) 
+    {
+    	Pickup pickup = obj.GetComponent<Pickup>();
+    	pickup.HandleCollision(this);
+    }
+
+    private void CollideWall(GameObject obj) 
+    {
+    	// TODO
+    }
+
+    private void CollidePlayer(Hero attackingHero)
+    {
         // This hero is fast enough to kill the hero that ran into it
         if (this.AboveThreshold && !attackingHero.AboveThreshold)
         {
