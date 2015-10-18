@@ -1262,7 +1262,11 @@ MonoBehaviour:
   HeroAboutToWin: {fileID: 0}
   HeroAboutToWinSound: {fileID: 0}
   GameWonSound: {fileID: 0}
-  TimeTillChangeSprite: 2
+  TimeTillChangeSprite:
+  - 2
+  - 2
+  - 2
+  - 3.4000001
 --- !u!1 &1486187055 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 188786, guid: 27ab4ff619d2c4e8db6ee852cd94d92a, type: 2}
@@ -1693,7 +1697,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

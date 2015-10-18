@@ -113,7 +113,7 @@ public class CollisionController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		bool debug = true;
+		bool debug = false;
 
 		if(debug){
 			if(this.type == "Player") {
