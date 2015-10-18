@@ -41,7 +41,7 @@ public class Pickup : MonoBehaviour
 	{
 		if (hero == null)
 			return;
-		else if (hero.hasPowerup) {
+		else if (hero.hasPowerup && this.PickupType!=Type.SpeedPad) {
 			Debug.Log (hero.name + " could not pick up: " + this.PickupType.ToString ());
 			return;
 		} else {
