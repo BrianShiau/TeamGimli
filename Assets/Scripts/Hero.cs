@@ -289,6 +289,11 @@ public class Hero : MonoBehaviour
             body2.GetComponent<TrailRenderer>().enabled = false;
             body3.GetComponent<TrailRenderer>().enabled = false;
         }
+		if (this.HeroController.GetResetGame)
+		{
+			GameObject scoreKeeper = GameObject.Find("ScoreKeeper");
+			scoreKeeper.GetComponent<ScoreKeeper>().ResetGame();
+		}
     }
 
     void accelerateByVector(float x_component, float y_component)
@@ -417,4 +422,8 @@ public class Hero : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+	public void Reset(){
+
+	}
 }
