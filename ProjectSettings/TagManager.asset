@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - GameOver
-=======
-  - Pickup
-  - Wall
->>>>>>> c03b48b5423e302cf81f8d1f0b10db64d99a8119
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - Projectile
-  - IgnorePlatforms
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,16 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Ground
-    uniqueID: 3476635573
-    locked: 1
-  - name: Characters
-    uniqueID: 3513809513
-    locked: 0
-  - name: Foreground
-    uniqueID: 833249835
-    locked: 0
-  - name: True Front
-    uniqueID: 658372867
     locked: 0
