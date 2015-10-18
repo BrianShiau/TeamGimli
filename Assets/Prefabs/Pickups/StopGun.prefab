@@ -12,7 +12,7 @@ GameObject:
   - 212: {fileID: 21292756}
   - 58: {fileID: 5844204}
   m_Layer: 0
-  m_Name: MassiveAcceleration
+  m_Name: StopGun
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickupType: 1
+  secTillResetAccPowerup: 5
   MassiveAccelerationValue: .600000024
   MassiveDecelerationValue: .200000003
   ExpirationTime: 0
