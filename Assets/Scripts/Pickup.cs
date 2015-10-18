@@ -88,6 +88,10 @@ public class Pickup : MonoBehaviour
 			} 
 		case Type.SpeedPad:
 			{
+				if(this.transform.position.x > 1)
+					hero.velocity.x -= 120;
+				if(this.transform.position.y > 1)
+					hero.velocity.y -= 80;
 				hero.velocity.x += 40;
 				hero.velocity.y += 40;
 				this.ExpirationTime = 0.0f;
