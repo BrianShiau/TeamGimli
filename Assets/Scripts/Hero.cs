@@ -163,7 +163,7 @@ public class Hero : MonoBehaviour
     void Update ()
     {
         /* Debug.Log(powerupName); */
-        if (this.powerupName == "AlterThreshold" && this.AlterThresholdTimer < 0.0f)
+        if (this.AlterThresholdTimer < 0.0f)
         {
             this.AlterThresholdTimer = 5.0f; 
             this.powerupName = "none";
@@ -173,6 +173,7 @@ public class Hero : MonoBehaviour
         {
             body.gameObject.GetComponent<Renderer>().material.color = Color.red;
         }
+
 
         if (this.HeroController.Shooting && /*this.hasPowerup &&*/
                 this.powerupName == "StopGun")
