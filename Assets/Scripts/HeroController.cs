@@ -100,11 +100,8 @@ public class HeroController : MonoBehaviour
 	{
 		get
 		{
-			if (this.PlayerNumber == 1)
-			{
-				return Input.GetButtonUp ("Fire3");
-			}
-			return false;
+			InputDevice inputDevice = this.InputDevice;
+			return (inputDevice != null) ? inputDevice.Action1.WasReleased : (Input.GetButtonUp ("Fire1"));
 		}
 	}
 

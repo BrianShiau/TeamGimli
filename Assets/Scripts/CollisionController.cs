@@ -20,13 +20,13 @@ public class CollisionController : MonoBehaviour {
 	  	radius = 1.7f;
 	  } else if(type == "Player") {
 	    radius = 1.3f;
-	  } else {
+	  } else if(type == "Wall") {
 	  	border = new Vector2(0, 0);
 	  }
 
 
-	  maxX = 28.0f;
-	  minX = -28.0f;
+	  maxX = 26.0f;
+	  minX = -26.0f;
 	  maxY = 12.5f;
 	  minY = -12.5f;
 	}
@@ -113,7 +113,7 @@ public class CollisionController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		bool debug = true;
+		/*bool debug = true;
 
 		if(debug){
 			if(this.type == "Player") {
@@ -125,7 +125,7 @@ public class CollisionController : MonoBehaviour {
 				Vector3 pos = gameObject.transform.position;
 				Drawing.DrawCircle(Camera.main, pos, this.radius, Color.red, 2f, Vector2.one);
 			}
-		}
+		}*/
 	}
 
 	public float getRadius() {

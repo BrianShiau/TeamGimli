@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - GameOver
+=======
+  - Pickup
+  - Wall
+>>>>>>> c03b48b5423e302cf81f8d1f0b10db64d99a8119
   layers:
   - Default
   - TransparentFX
