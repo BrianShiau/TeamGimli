@@ -93,6 +93,7 @@ public class Hero : MonoBehaviour
     private float JumpForgivenessTimeLeft;
     private GameObject MaxSizeSound;
     private int NumDeaths;
+	private float previousRotation;
 
     public Sprite[] BodySprites;
     public Sprite[] ProjectileSprites;
@@ -112,16 +113,28 @@ public class Hero : MonoBehaviour
 
         this.groundMask = LayerMask.NameToLayer ("Ground");
 		this.IsAlive = true;
-    }
-
-    private float scale
-    {
-        set
-        {
-            float minYOld = this.GetComponent<Collider2D>().bounds.min.y;
-            this.transform.localScale = new Vector3((this.FacingRight ? 1.0f : -1.0f) * value, value, 1.0f);
-            float minYNew = this.GetComponent<Collider2D>().bounds.min.y;
-            Vector3 v = this.transform.position;
+		if(this.PlayerIndex==1){
+			previousRotation = 90.0f;
+		}
+		if(this.PlayerIndex==2){
+			previousRotation = 180.0f;
+		}
+		if(this.PlayerIndex==3){
+			previousRotation = 270.0f;
+		}
+		if(this.PlayerIndex==4){
+			previousRotation = 0.0f;
+		}
+	}
+	
+	private float scale
+	{
+		set
+		{
+			float minYOld = this.GetComponent<Collider2D>().bounds.min.y;
+			this.transform.localScale = new Vector3((this.FacingRight ? 1.0f : -1.0f) * value, value, 1.0f);
+			float minYNew = this.GetComponent<Collider2D>().bounds.min.y;
+			Vector3 v = this.transform.position;
             this.transform.position = new Vector3(v.x, v.y + minYOld - minYNew, v.z);
         }
         get
@@ -247,10 +260,11 @@ public class Hero : MonoBehaviour
         else{
             newRotation = newX > 0 ? 90 : 270;
             if (newX==0)
-                newRotation = 0;
+                newRotation = previousRotation;
         }
         body.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -newRotation));
-        
+		previousRotation = newRotation;
+
         this.velocity = new Vector2 (newX, newY);
 
         // Sets threshold to true if at a velocity that kills another player
