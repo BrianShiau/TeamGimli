@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 public class CollisionController : MonoBehaviour {
-  private float radius=0.8f;
+  private float radius=1.6f;
   private float x,y;
   private float maxX, minX, maxY, minY;
   
@@ -64,6 +64,12 @@ public class CollisionController : MonoBehaviour {
         double distance = Math.Sqrt(Math.Pow(closest.x - centerX, 2) + Math.Pow(closest.y - centerY, 2));
 
         if(distance <= radius) {
+        	Debug.Log("Line-Circle Test Passed");
+        	return true;
+        }
+
+        if(Math.Pow(centerX - startX, 2) + Math.Pow(centerY - startY, 2) <= Math.Pow(2 * radius, 2)) {
+        	Debug.Log("Circle-Circle Test Passed");
         	return true;
         }
 
