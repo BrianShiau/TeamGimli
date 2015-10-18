@@ -150,13 +150,19 @@ public class Hero : MonoBehaviour
             // Debug.Log("You can't shoot bish!!!");
 			this.TimeUntilNextProjectile = this.ProjectileDelay;
 			GameObject projectile = (GameObject)GameObject.Instantiate(this.Projectile, this.ProjectileEmitLocator.transform.position, Quaternion.identity);
-			projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite;
-			projectile.GetComponent<Projectile>().OwnerHero = this;
-			projectile.transform.localScale = this.transform.localScale;
+			/* projectile.GetComponent<SpriteRenderer>().sprite = this.ProjectileSprite; */
+			/* projectile.GetComponent<Projectile>().OwnerHero = this; */
+			/* projectile.transform.localScale = this.transform.localScale; */
 			float launchVelocity = (this.FacingRight ? 1.0f : -1.0f) * this.ProjectileLaunchVelocity;
-			projectile.GetComponent<Projectile>().Velocity = new Vector2(launchVelocity, 0.0f);
+			projectile.GetComponent<Projectile>().Velocity = this.velocity * this.ProjectileLaunchVelocity; 
 			SoundFX.Instance.OnHeroFire(this);
 			Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
+
+        }
+
+        else if (this.HeroController.Jump)
+        {
+            // Add "force field" to Hero for a temporary amount of time to not be slowed by hitting wall
         }
         /* else if (this.HeroController.Shooting && this.TimeUntilNextProjectile < 0.0f) */
 		/* { */
@@ -306,6 +312,7 @@ public class Hero : MonoBehaviour
         {
             GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
             projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
+            this.velocity -= attackingHero.velocity;
             attackingHero.Die(null);
         }
 
@@ -314,6 +321,7 @@ public class Hero : MonoBehaviour
         {
             GameObject projectileExplosion = (GameObject)GameObject.Instantiate(attackingHero.ProjectileExplosion, this.transform.position, Quaternion.identity);
             projectileExplosion.GetComponent<SpriteRenderer>().sprite = attackingHero.ProjectileExplosionSprite;
+            attackingHero.velocity -= this.velocity;
             this.Die(null);
         }
 
@@ -321,10 +329,12 @@ public class Hero : MonoBehaviour
         {
             if (this.velocity.magnitude > attackingHero.velocity.magnitude)
             {
+                this.velocity -= attackingHero.velocity;
                 attackingHero.Die(null);
             }
             else
             {
+                attackingHero.velocity -= this.velocity;
                 this.Die(null);
             }
         }
